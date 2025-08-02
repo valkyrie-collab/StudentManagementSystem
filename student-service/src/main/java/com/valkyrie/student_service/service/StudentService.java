@@ -18,8 +18,8 @@ import java.util.UUID;
 public class StudentService {
     private static final Student defaultStudent = new Student().setId("null").setFirstName("null")
             .setSecondName("null").setFatherFirstName("null").setFatherSecondName("null").setImage(null)
-            .setFatherSecondName("null").setMotherFirstName("null").setMotherSecondName("null")
-            .setDob(null).setRole((byte)-1).setContact(-1L).setSection('N').setStander("null");
+            .setEnrolment(null).setFatherSecondName("null").setMotherFirstName("null").setMotherSecondName("null")
+            .setPassOut(null).setDob(null).setRole((byte)-1).setContact(-1L).setSection('N').setStander("null");
     private StudentRepository repo;
     @Autowired
     private void setRepo(StudentRepository repo) {this.repo = repo;}
@@ -77,9 +77,9 @@ public class StudentService {
             } else if (!repo.findById(student.getId()).orElse(student).toString().equals(student.toString())) {
                 repo.save(student);
                 message.add("The Student With ID = " + student.getId() + " has been updated successfully...");
+            } else {
+                message.add("The Student not updated/saved....");
             }
-
-            message.add("The Student not updated/saved....");
         }
 
         return !students.isEmpty()? Store.initialize(HttpStatus.ACCEPTED, message) :
@@ -87,6 +87,7 @@ public class StudentService {
     }
 
     //Find Student
+    @Transactional
     public Store<Student> findStudentById(String id) {
         Student student = repo.findById(id).orElse(null);
 
@@ -94,6 +95,7 @@ public class StudentService {
                 Store.initialize(HttpStatus.OK, student);
     }
 
+    @Transactional
     public Store<List<Student>> findStudentByName(String firstName, String secondName) {
         List<Student> students = new ArrayList<>();
 
@@ -111,6 +113,7 @@ public class StudentService {
                 Store.initialize(HttpStatus.BAD_REQUEST, List.of(defaultStudent));
     }
 
+    @Transactional
     public Store<List<Student>> findStudentByFatherName(String fatherFirstName,
                                                         String fatherSecondName) {
         List<Student> students = new ArrayList<>();
@@ -129,6 +132,7 @@ public class StudentService {
                 Store.initialize(HttpStatus.BAD_REQUEST, List.of(defaultStudent));
     }
 
+    @Transactional
     public Store<List<Student>> findStudentByMotherName(String motherFirstName,
                                                         String motherSecondName) {
         List<Student> students = new ArrayList<>();
@@ -147,6 +151,7 @@ public class StudentService {
                 Store.initialize(HttpStatus.BAD_REQUEST, List.of(defaultStudent));
     }
 
+    @Transactional
     public Store<List<Student>> findStudentByStanderAndSection(String stander, char section) {
         List<Student> students = new ArrayList<>();
 

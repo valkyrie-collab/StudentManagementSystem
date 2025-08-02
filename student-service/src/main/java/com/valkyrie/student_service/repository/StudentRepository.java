@@ -2,6 +2,7 @@ package com.valkyrie.student_service.repository;
 
 import com.valkyrie.student_service.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -43,6 +44,7 @@ public interface StudentRepository extends JpaRepository<Student, String> {
     List<Student> findAllByStanderAndSection(@Param("stander") String stander,
                                              @Param("section") char section);
 
+    @Modifying
     @Query("DELETE FROM Student s WHERE s.stander = :stander AND s.section = :section")
     void deleteAllByStanderAndSection(@Param("stander") String stander,
                                       @Param("section") char section);

@@ -20,6 +20,8 @@ public class Student {
     private String fatherSecondName;
     private String motherFirstName;
     private String motherSecondName;
+    private Date enrolment;
+    private Date passOut;
     private String stander;
     private char section;
     private byte role;
@@ -43,6 +45,10 @@ public class Student {
     public String getMotherFirstName() {return motherFirstName;}
 
     public String getMotherSecondName() {return motherSecondName;}
+
+    public Date getEnrolment() {return enrolment;}
+
+    public Date getPassOut() {return passOut;}
 
     public String getStander() {return stander;}
 
@@ -87,6 +93,16 @@ public class Student {
 
     public Student setMotherFirstName(String motherFirstName) {
         this.motherFirstName = motherFirstName;
+        return this;
+    }
+
+    public Student setEnrolment(Date enrolment) {
+        this.enrolment = enrolment;
+        return this;
+    }
+
+    public Student setPassOut(Date passOut) {
+        this.passOut = passOut;
         return this;
     }
 
@@ -137,8 +153,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return id + firstName + secondName + fatherFirstName +
-                fatherSecondName + motherFirstName + motherSecondName +
+        return id + firstName + secondName + fatherFirstName + fatherSecondName +
+                motherFirstName + motherSecondName + enrolment + passOut +
                 stander + section + role + contact + subjectId + dob + bloodGroup;
     }
 }

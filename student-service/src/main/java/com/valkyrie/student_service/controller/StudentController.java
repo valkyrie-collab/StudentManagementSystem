@@ -41,9 +41,42 @@ public class StudentController {
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
-    @GetMapping()
+    @GetMapping("/find-student-by-mother-name")
+    public ResponseEntity<List<Student>> findByMotherName(@RequestParam(required = false) String firstName,
+                                                          @RequestParam(required = false) String secondName) {
+        Store<List<Student>> store = service.findStudentByMotherName(firstName, secondName);
 
-    @DeleteMapping()
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
 
-    @DeleteMapping()
+    @GetMapping("/find-student-by-name")
+    public ResponseEntity<List<Student>> findByName(@RequestParam(required = false) String firstName,
+                                                    @RequestParam(required = false) String secondName) {
+        Store<List<Student>> store = service.findStudentByName(firstName, secondName);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
+    @GetMapping("/find-student-by-stander-and-section")
+    public ResponseEntity<List<Student>> findByStanderAndSection(@RequestParam(required = false) String stander,
+                                                                 @RequestParam(required = true) char section) {
+        Store<List<Student>> store = service.findStudentByStanderAndSection(stander, section);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
+    @DeleteMapping("/delete-student-by-id")
+    public ResponseEntity<String> deleteStudentById(@RequestParam String id) {
+        Store<String> store = service.deleteStudentById(id);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
+    @DeleteMapping("/delete-students-by-stander-and-section")
+    public ResponseEntity<String> deleteStudentsByStanderAndSection(@RequestParam String stander,
+                                                                    @RequestParam char section) {
+        Store<String> store = service.deleteStudentsByStanderAndSection(stander, section);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
 }
