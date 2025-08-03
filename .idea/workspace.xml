@@ -5,22 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16f9186a-36c1-4b04-87ce-d4429cc6da3e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/controller/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/repository/StudentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/controller/MarksController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/model/Marks.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/model/MarksWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/model/Store.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/repository/MarksRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/service/MarksService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/feign/MarksFeignController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/MarksWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/StudentWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/StudentServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/StudentServiceApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,20 +50,31 @@
   "associatedIndex": 7
 }]]></component>
   <component name="ProjectId" id="30jIy0VWaFlIve4tSxAqGmew3C5" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.MarksServiceApplication.executor": "Run",
     "Application.StudentServiceApplication.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "StudentService",
+    "git-widget-placeholder": "MarksService",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.valkyrie.marks_service.model" />
+      <recent name="com.valkyrie.student_service.model" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -62,7 +82,20 @@
       </set>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MarksServiceApplication">
+    <configuration name="MarksServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.valkyrie.marks_service.MarksServiceApplication" />
+      <module name="marks-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.valkyrie.marks_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="StudentServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.valkyrie.student_service.StudentServiceApplication" />
       <module name="student-service" />
@@ -78,6 +111,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MarksServiceApplication" />
         <item itemvalue="Application.StudentServiceApplication" />
       </list>
     </recent_temporary>
