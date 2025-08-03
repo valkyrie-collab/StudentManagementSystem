@@ -17,7 +17,7 @@ import com.valkyrie.teacher_service.repository.TeacherRepository;
 public class TeacherService {
     private static final Teacher defaultTeacher = new Teacher().setId("null").setFirstName("null")
             .setSecondName("null").setQualification("null").setAge((byte) 0)
-            .setDob(null).setSalary(0).setSubject("null");
+            .setDob(null).setSalary(0).setSubjects(null);
     
     private TeacherRepository repo;
     @Autowired
@@ -30,29 +30,29 @@ public class TeacherService {
         for (Teacher teacher : teachers) {
             UpperCaseTask firstName = UpperCaseTask.initialize(teacher.getFirstName());
             UpperCaseTask secondName = UpperCaseTask.initialize(teacher.getSecondName());
-            UpperCaseTask subject = UpperCaseTask.initialize(teacher.getSubject());
+//            UpperCaseTask subject = UpperCaseTask.initialize(teacher.getSubjects());
 
             Thread taskNumberOne = new Thread(firstName);
             Thread taskNumberTwo = new Thread(secondName);
-            Thread taskNumberThree = new Thread(subject);
+//            Thread taskNumberThree = new Thread(subject);
 
-            taskNumberOne.start(); taskNumberTwo.start(); taskNumberThree.start();
+            taskNumberOne.start(); taskNumberTwo.start();
 
             try {
                 taskNumberOne.join();
                 taskNumberTwo.join();
-                taskNumberThree.join();
+//                taskNumberThree.join();
             } catch (InterruptedException ie) {
                 taskNumberOne.interrupt();
                 taskNumberTwo.interrupt();
-                taskNumberThree.interrupt();
+//                taskNumberThree.interrupt();
                 ie.printStackTrace();
             }
 
             if (!taskNumberOne.isInterrupted() ||
-                    !taskNumberTwo.isInterrupted() || !taskNumberThree.isInterrupted()) {
+                    !taskNumberTwo.isInterrupted()) {
                 teacher = teacher.setFirstName(firstName.getWord())
-                        .setSecondName(secondName.getWord()).setSubject(subject.getWord());
+                        .setSecondName(secondName.getWord());
                 boolean presentId = teacher.getId() == null;
 
                 if (presentId) {

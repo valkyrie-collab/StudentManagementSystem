@@ -1,10 +1,9 @@
 package com.valkyrie.teacher_service.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "teacher")
@@ -13,10 +12,20 @@ public class Teacher {
     private String id;
     private String firstName;
     private String secondName;
+    private String fatherFirstName;
+    private String fatherSecondName;
+    private String motherFirstName;
+    private String motherSecondName;
+    private String classTeacher;
     private String qualification;
-    private String subject;
+    @ElementCollection
+    private List<String> subjects;
+    private Date dateOfJoin;
+    private String passOutUniversity;
     private Date dob;
     private byte age;
+    @Embedded
+    private Image image;
     private int salary;
 
     public String getId() {return id;}
@@ -27,7 +36,21 @@ public class Teacher {
 
     public String getQualification() {return qualification;}
 
-    public String getSubject() {return subject;}
+    public String getFatherFirstName() {return fatherFirstName;}
+
+    public String getFatherSecondName() {return fatherSecondName;}
+
+    public String getMotherFirstName() {return motherFirstName;}
+
+    public String getMotherSecondName() {return motherSecondName;}
+
+    public String getClassTeacher() {return classTeacher;}
+    
+    public List<String> getSubjects() {return subjects;}
+    
+    public Date getDateOfJoin() {return dateOfJoin;}
+
+    public Image getImage() {return image;}
 
     public Date getDate() {return dob;}
 
@@ -55,8 +78,48 @@ public class Teacher {
         return this;
     }
 
-    public Teacher setSubject(String subject) {
-        this.subject = subject;
+    public Teacher setFatherFirstName(String fatherFirstName) {
+        this.fatherFirstName = fatherFirstName;
+        return this;
+    }
+
+    public Teacher setFatherSecondName(String fatherSecondName) {
+        this.fatherSecondName = fatherSecondName;
+        return this;
+    }
+
+    public Teacher setMotherFirstName(String motherFirstName) {
+        this.motherFirstName = motherFirstName;
+        return this;
+    }
+
+    public Teacher setMotherSecondName(String motherSecondName) {
+        this.motherSecondName = motherSecondName;
+        return this;
+    }
+
+    public Teacher setClassTeacher(String classTeacher) {
+        this.classTeacher = classTeacher;
+        return this;
+    }
+
+    public Teacher setSubjects(List<String> subjects) {
+        this.subjects = subjects;
+        return this;
+    }
+
+    public Teacher setDateOfJoin(Date dateOfJoin) {
+        this.dateOfJoin = dateOfJoin;
+        return this;
+    }
+
+    public Teacher setPassOutUniversity(String passOutUniversity) {
+        this.passOutUniversity = passOutUniversity;
+        return this;
+    }
+
+    public Teacher setImage(Image image) {
+        this.image = image;
         return this;
     }
 
@@ -77,6 +140,8 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return id + firstName + qualification + subject + age + salary;
+        return id + firstName + qualification +
+                subjects + age + salary + fatherFirstName + fatherSecondName +
+                motherFirstName + motherSecondName + classTeacher + dateOfJoin + dob + image;
     }
 }

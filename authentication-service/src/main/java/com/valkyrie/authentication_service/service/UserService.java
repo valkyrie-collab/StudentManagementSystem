@@ -59,11 +59,7 @@ public class UserService {
     }
 
     public Store<User> getUser(String username) {
-        System.out.println("called");
         User user = repo.findById(username).orElse(null);
-
-        assert user != null;
-        System.out.println(user.toString());
 
         return Store.initialize(HttpStatus.OK, user);
     }

@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16f9186a-36c1-4b04-87ce-d4429cc6da3e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/CustomAuthenticationProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/CustomUserDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/SecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/TokenConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/TokenFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/feign/AuthenticationByPass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/feign/AuthenticationFeignController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/model/Api.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/Image.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/ApiGatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/Teacher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +69,7 @@
     "Spring Boot.MarksServiceApplication.executor": "Run",
     "Spring Boot.ServiceRegistryApplication.executor": "Run",
     "Spring Boot.StudentServiceApplication.executor": "Run",
-    "git-widget-placeholder": "AuthenticationService",
+    "git-widget-placeholder": "Application",
     "last_opened_file_path": "/home/valkyrie/Documents/Programming/Spring_Programming/StudentManagementMicroservice",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -246,7 +236,7 @@
       <option name="presentableId" value="Default" />
       <updated>1754134805362</updated>
       <workItem from="1754250442082" duration="95000" />
-      <workItem from="1754250553391" duration="302000" />
+      <workItem from="1754250553391" duration="2186000" />
     </task>
     <servers />
   </component>
