@@ -5,18 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16f9186a-36c1-4b04-87ce-d4429cc6da3e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/config/CustomAuthenticationProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/config/CustomUserDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/config/CustomUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/config/SecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/config/TokenConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/config/TokenFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/Store.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/CustomAuthenticationProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/CustomUserDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/SecurityConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/TokenConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config/TokenFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/feign/AuthenticationByPass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/feign/AuthenticationFeignController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/model/Api.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/ApiGatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,21 +36,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "valkyrie-collab"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;valkyrie-collab&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:valkyrie-collab/StudentManagementSystem.git",
-    "accountId": "991f9b44-2fd4-40c8-be33-31ac19e55e27"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:valkyrie-collab/StudentManagementSystem.git&quot;,
+    &quot;accountId&quot;: &quot;2b3b27d6-45b1-45c3-8ec5-7bbec00ed92a&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="30jIy0VWaFlIve4tSxAqGmew3C5" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,19 +61,42 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.ApiGatewayApplication.executor": "Run",
     "Application.AuthenticationServiceApplication.executor": "Run",
     "Application.MarksServiceApplication.executor": "Run",
+    "Application.ServiceRegistryApplication.executor": "Run",
     "Application.StudentServiceApplication.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "MarksService",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "Spring Boot.ApiGatewayApplication.executor": "Run",
+    "Spring Boot.AuthenticationServiceApplication.executor": "Run",
+    "Spring Boot.MarksServiceApplication.executor": "Run",
+    "Spring Boot.ServiceRegistryApplication.executor": "Run",
+    "Spring Boot.StudentServiceApplication.executor": "Run",
+    "git-widget-placeholder": "AuthenticationService",
+    "last_opened_file_path": "/home/valkyrie/Documents/Programming/Spring_Programming/StudentManagementMicroservice",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.valkyrie.api_gateway.model" />
       <recent name="com.valkyrie.marks_service.model" />
       <recent name="com.valkyrie.student_service.model" />
     </key>
@@ -80,10 +105,27 @@
     <option name="configurationTypes">
       <set>
         <option value="Application" />
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.AuthenticationServiceApplication">
+  <component name="RunManager" selected="Application.ApiGatewayApplication">
+    <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.valkyrie.api_gateway.ApiGatewayApplication" />
+      <module name="api-gateway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.valkyrie.api_gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AuthenticationServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.valkyrie.authentication_service.AuthenticationServiceApplication" />
       <module name="authentication-service" />
@@ -110,6 +152,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ServiceRegistryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.valkyrie.service_registry.ServiceRegistryApplication" />
+      <module name="service-registry" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.valkyrie.service_registry.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="StudentServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.valkyrie.student_service.StudentServiceApplication" />
       <module name="student-service" />
@@ -123,13 +178,65 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.valkyrie.api_gateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthenticationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="authentication-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.valkyrie.authentication_service.AuthenticationServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MarksServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="marks-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.valkyrie.marks_service.MarksServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceRegistryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="service-registry" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.valkyrie.service_registry.ServiceRegistryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="student-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.valkyrie.student_service.StudentServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TeacherServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="teacher-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.valkyrie.teacher_service.TeacherServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.AuthenticationServiceApplication" />
-        <item itemvalue="Application.MarksServiceApplication" />
         <item itemvalue="Application.StudentServiceApplication" />
+        <item itemvalue="Application.ServiceRegistryApplication" />
+        <item itemvalue="Application.MarksServiceApplication" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26927.53" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.26927.53" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -138,7 +245,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1754134805362</updated>
+      <workItem from="1754250442082" duration="95000" />
+      <workItem from="1754250553391" duration="302000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
