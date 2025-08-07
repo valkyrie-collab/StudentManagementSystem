@@ -18,18 +18,14 @@ public class MarksController {
     private void setService(MarksService service) {this.service = service;}
 
     @PostMapping("/save-marks")
-    public ResponseEntity<String> save(@RequestParam String studentId,
-                                       @RequestBody Marks marks) {
-        Store<String> store = service.save(studentId, marks);
+    public ResponseEntity<String> save(@RequestBody Marks marks) {
+        Store<String> store = service.save(marks);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @PostMapping("/update-marks")
-    public ResponseEntity<String> update(@RequestParam String studentId,
-                                         @RequestBody Marks marks) {
-        return save(studentId, marks);
-    }
+    public ResponseEntity<String> update(@RequestBody Marks marks) {return save(marks);}
 
     @GetMapping("/find-marks-by-student-id")
     public ResponseEntity<MarksWrapper> findByStudentId(@RequestParam String studentId) {

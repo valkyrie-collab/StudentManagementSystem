@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16f9186a-36c1-4b04-87ce-d4429cc6da3e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/feign/TeacherFeignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/feign/TeacherFeignController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/StudentWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/StudentWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/controller/TeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/controller/TeacherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/feign/StudentFeignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/feign/StudentFeignController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/repository/TeacherRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/repository/TeacherRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/service/TeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/service/TeacherService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/feign/StudentFeignController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +229,7 @@
       <updated>1754134805362</updated>
       <workItem from="1754250442082" duration="95000" />
       <workItem from="1754250553391" duration="13785000" />
-      <workItem from="1754384126115" duration="19033000" />
+      <workItem from="1754384126115" duration="19403000" />
     </task>
     <servers />
   </component>

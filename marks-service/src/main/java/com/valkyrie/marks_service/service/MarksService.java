@@ -1,11 +1,13 @@
 package com.valkyrie.marks_service.service;
 
+import com.valkyrie.marks_service.feign.StudentFeignController;
 import com.valkyrie.marks_service.model.Marks;
 import com.valkyrie.marks_service.model.MarksWrapper;
 import com.valkyrie.marks_service.model.Store;
 import com.valkyrie.marks_service.repository.MarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,10 @@ public class MarksService {
     private MarksRepository repo;
     @Autowired
     private void setRepo(MarksRepository repo) {this.repo = repo;}
+
+    private StudentFeignController studentFeign;
+    @Autowired
+    private void setStudentFeign(StudentFeignController studentFeign) {this.studentFeign = studentFeign;}
 
     private MarksWrapper getMarks(Marks presentMarks) {
 
@@ -31,17 +37,23 @@ public class MarksService {
     }
 
     //save&update
-    public Store<String> save(String studentId, Marks marks) {
+    public Store<String> save(Marks marks) {
         boolean check = marks.getId() == null;
         boolean checkTerm = marks.getTerm() == null;
-        studentId = new String(Base64.getDecoder().decode(studentId));
+        ResponseEntity<Boolean> checkStudent = studentFeign.checkStudentPresent(marks.getStudentId());
+
+        if (checkStudent == null || checkStudent.getBody() == null) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, "Marks not Saved");
+        }
+
+//        studentId = new String(Base64.getDecoder().decode(studentId));
         LocalDate currentDate = LocalDate.now();
         LocalDate january = LocalDate.of(currentDate.getYear(), 1, 1);
         LocalDate April = LocalDate.of(currentDate.getYear(), 4, 1);
         LocalDate August = LocalDate.of(currentDate.getYear(), 8, 1);
         LocalDate December = LocalDate.of(currentDate.getYear(), 12, 31);
 
-        if (check && checkTerm) {
+        if (check && checkTerm && checkStudent.getBody()) {
             String term = null;
 
             if (currentDate.isAfter(january) && currentDate.isBefore(April)) {
@@ -52,7 +64,8 @@ public class MarksService {
                 term = "3nd-Term";
             }
 
-            repo.save(marks.setId(UUID.randomUUID().toString()).setStudentId(studentId)).setTerm(term);
+            repo.save(marks.setId(UUID.randomUUID().toString())
+                    .setStudentId(marks.getStudentId())).setTerm(term);
             return Store.initialize(HttpStatus.ACCEPTED, "Marks has been added successfully....");
         } else if (marks.toString().equals(repo.findById(marks.getId()).orElse(marks).toString())) {
             repo.save(marks);

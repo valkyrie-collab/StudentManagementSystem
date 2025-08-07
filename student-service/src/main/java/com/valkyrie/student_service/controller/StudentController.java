@@ -34,6 +34,13 @@ public class StudentController {
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
+    @GetMapping("/check-student-present")
+    public ResponseEntity<Boolean> checkStudentPresent(@RequestParam String id) {
+        Store<Boolean> store = service.checkStudentPresent(id);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
     @GetMapping("/find-students-by-father-name")
     public ResponseEntity<List<StudentWrapper>> findByFatherName(@RequestParam(required = false) String firstName,
                                                           @RequestParam(required = false) String secondName) {

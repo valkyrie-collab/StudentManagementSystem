@@ -221,6 +221,17 @@ public class StudentService {
                 Store.initialize(HttpStatus.BAD_REQUEST, studentWrappers);
     }
 
+    @Transactional
+    public Store<Boolean> checkStudentPresent(String id) {
+        Student student = repo.findById(id).orElse(null);
+
+        if (student == null) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, false);
+        }
+
+        return Store.initialize(HttpStatus.OK, true);
+    }
+
 //    @Transactional
 //    public Store<List<StudentWrapper>> findStudentsByClassTeacherName(String classTeacherName) {
 //        List<Student> students = repo.findAllByClassTeacherName(classTeacherName);
