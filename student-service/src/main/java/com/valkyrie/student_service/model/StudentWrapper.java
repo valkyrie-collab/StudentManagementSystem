@@ -21,8 +21,9 @@ public class StudentWrapper {
     private MarksWrapper marks;
     private Date dob;
     private String bloodGroup;
-    @Embedded //will become column in the same table
     private Image image;
+    private String classTeacherId;
+    private String classTeacherName;
 
     public String getId() {return id;}
 
@@ -57,6 +58,10 @@ public class StudentWrapper {
     public String getBloodGroup() {return bloodGroup;}
 
     public Image getImage() {return image;}
+
+    public String getClassTeacherId() {return classTeacherId;}
+
+    public String getClassTeacherName() {return classTeacherName;}
 
     public StudentWrapper setId(String id) {
         this.id = id;
@@ -140,6 +145,16 @@ public class StudentWrapper {
 
     public StudentWrapper setImage(Image image) {
         this.image = image;
+        return this;
+    }
+
+    public StudentWrapper setClassTeacherId(String classTeacherId) {
+        this.classTeacherId = classTeacherId;
+        return this;
+    }
+
+    public StudentWrapper setClassTeacherName(String classTeacherName) {
+        this.classTeacherName = classTeacherName;
         return this;
     }
 }

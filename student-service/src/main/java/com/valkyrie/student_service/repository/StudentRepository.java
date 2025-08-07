@@ -48,4 +48,8 @@ public interface StudentRepository extends JpaRepository<Student, String> {
     @Query("DELETE FROM Student s WHERE s.stander = :stander AND s.section = :section")
     void deleteAllByStanderAndSection(@Param("stander") String stander,
                                       @Param("section") char section);
+
+    List<Student> findAllByClassTeacherId(String classTeacherId);
+
+    List<Student> findAllByClassTeacherName(String classTeacherName);
 }

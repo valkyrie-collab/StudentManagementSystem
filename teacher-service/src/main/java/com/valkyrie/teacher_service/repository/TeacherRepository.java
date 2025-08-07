@@ -21,7 +21,19 @@ public interface TeacherRepository extends JpaRepository<Teacher, String>{
 
     List<Teacher> findAllBySecondName(String secondName);
 
-    List<Teacher> findAllBySubject(String subject);
+    @Query("SELECT t FROM Teacher t WHERE t.fatherFirstName = :firstName AND t.fatherSecondName = :secondName")
+    List<Teacher> findAllByFatherName(@Param("firstName") String firstName,
+                                      @Param("secondName") String secondName);
 
-    void deleteAllBySubject(String subject);
+    @Query("SELECT t FROM Teacher t WHERE t.motherFirstName = :firstName AND t.motherSecondName = :secondName")
+    List<Teacher> findAllByMotherName(@Param("firstName") String firstName,
+                                      @Param("secondName") String secondName);
+
+    List<Teacher> findAllByFatherFirstName(String fatherFirstName);
+
+    List<Teacher> findAllByFatherSecondName(String fatherSecondName);
+
+    List<Teacher> findAllByMotherFirstName(String motherFirstName);
+
+    List<Teacher> findAllByMotherSecondName(String motherSecondName);
 }

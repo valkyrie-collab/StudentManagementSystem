@@ -3,24 +3,24 @@ package com.valkyrie.teacher_service.model;
 import jakarta.persistence.Lob;
 
 public class Image {
-    private String name;
     private String type;
+    private String name;
     @Lob
     private byte[] data;
 
-    public String getName() {return name;}
-
     public String getType() {return type;}
+
+    public String getName() {return name;}
 
     public byte[] getData() {return data;}
 
-    public Image setName(String name) {
-        this.name = name;
+    public Image setType(String type) {
+        this.type = type;
         return this;
     }
 
-    public Image setType(String type) {
-        this.type = type;
+    public Image setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -29,6 +29,5 @@ public class Image {
         return this;
     }
 
-    @Override
-    public String toString() {return name + "." + type;}
+    public String getImageFullName() {return name + "." + type;}
 }

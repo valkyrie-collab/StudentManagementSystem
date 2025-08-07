@@ -9,9 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class MarksService {
@@ -22,6 +21,7 @@ public class MarksService {
     private MarksWrapper getMarks(Marks presentMarks) {
 
         return new MarksWrapper().setBengali(presentMarks.getBengali())
+                .setHistoryAndCivics(presentMarks.getHistoryAndCivics())
                 .setBiology(presentMarks.getBiology()).setDrawing(presentMarks.getDrawing())
                 .setComputer(presentMarks.getComputer()).setChemistry(presentMarks.getChemistry())
                 .setEnglishI(presentMarks.getEnglishI()).setEnglishII(presentMarks.getEnglishII())
@@ -31,11 +31,28 @@ public class MarksService {
     }
 
     //save&update
-    public Store<String> save(Marks marks) {
+    public Store<String> save(String studentId, Marks marks) {
         boolean check = marks.getId() == null;
+        boolean checkTerm = marks.getTerm() == null;
+        studentId = new String(Base64.getDecoder().decode(studentId));
+        LocalDate currentDate = LocalDate.now();
+        LocalDate january = LocalDate.of(currentDate.getYear(), 1, 1);
+        LocalDate April = LocalDate.of(currentDate.getYear(), 4, 1);
+        LocalDate August = LocalDate.of(currentDate.getYear(), 8, 1);
+        LocalDate December = LocalDate.of(currentDate.getYear(), 12, 31);
 
-        if (check) {
-            repo.save(marks.setId(UUID.randomUUID().toString()));
+        if (check && checkTerm) {
+            String term = null;
+
+            if (currentDate.isAfter(january) && currentDate.isBefore(April)) {
+                term = "1st-Term";
+            } else if (currentDate.isAfter(April) && currentDate.isBefore(August)) {
+                term = "2nd-Term";
+            } else if (currentDate.isAfter(August) && currentDate.isBefore(December)) {
+                term = "3nd-Term";
+            }
+
+            repo.save(marks.setId(UUID.randomUUID().toString()).setStudentId(studentId)).setTerm(term);
             return Store.initialize(HttpStatus.ACCEPTED, "Marks has been added successfully....");
         } else if (marks.toString().equals(repo.findById(marks.getId()).orElse(marks).toString())) {
             repo.save(marks);
@@ -47,6 +64,7 @@ public class MarksService {
 
     //find
     public Store<MarksWrapper> findMarksByStudentId(String studentId) {
+        studentId = new String(Base64.getDecoder().decode(studentId));
         Marks presentMarks = repo.findByStudentId(studentId);
 
         if (presentMarks == null) {
@@ -57,6 +75,7 @@ public class MarksService {
     }
 
     public Store<MarksWrapper> findMarksByMarksId(String id) {
+        id = new String(Base64.getDecoder().decode(id));
         Marks presentMarks = repo.findByStudentId(id);
 
         if (presentMarks == null) {
@@ -67,11 +86,28 @@ public class MarksService {
     }
 
     //delete
+    public Store<String> removeMarksById(String id) {
+
+        if (repo.findById(id).orElse(null) == null) {
+            return Store.initialize(HttpStatus.OK,
+                    "The Marks With This ID = " + id + "Has Already been removed"
+            );
+        }
+
+        repo.deleteById(id);
+
+        return repo.findById(id).orElse(null) == null?
+                Store.initialize(HttpStatus.OK,
+                        "The Marks With the ID = " + id + "Has been removed successfully"
+                ) : Store.initialize(HttpStatus.BAD_REQUEST, "Deletion is Unsuccessful");
+    }
+
     @Transactional
     public Store<List<String>> removeMarksByStudentId(List<String> ids) {
         List<String> message = new ArrayList<>();
 
         for (String id : ids) {
+            id = new String(Base64.getDecoder().decode(id));
             if (repo.findByStudentId(id) == null) {
                 message.add("No Marks was there for student with ID = " + id +
                         " either it is already been deleted or check the ID......");

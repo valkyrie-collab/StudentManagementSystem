@@ -11,7 +11,12 @@ public class UpperCaseTask implements Runnable {
         wordArray[0] = Character.toUpperCase(wordArray[0]);
 
         for (int i = 1; i < size; i++) {
-            wordArray[i] = Character.toLowerCase(wordArray[i]);
+
+            if (wordArray[i - 1] == ' ') {
+                wordArray[i] = Character.toUpperCase(wordArray[i]);
+            } else {
+                wordArray[i] = Character.toLowerCase(wordArray[i]);
+            }
         }
 
         word = new String(wordArray);
