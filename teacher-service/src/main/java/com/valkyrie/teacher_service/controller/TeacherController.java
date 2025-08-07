@@ -1,5 +1,6 @@
 package com.valkyrie.teacher_service.controller;
 
+import com.valkyrie.teacher_service.model.TeacherWrapper;
 import com.valkyrie.teacher_service.model.UpperCaseTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class TeacherController {
 
     @PostMapping("/save-teacher")
     public ResponseEntity<String> save(@RequestBody List<Teacher> teachers) {
+        System.out.println("this is working");
         Store<String> store = service.save(teachers);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
@@ -39,36 +41,48 @@ public class TeacherController {
     }
 
     @GetMapping("/find-teacher-by-id")
-    public ResponseEntity<Teacher> findTeacherById(@RequestParam String id) {
-        Store<Teacher> store = service.findTeacherById(id);
+    public ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id) {
+        Store<TeacherWrapper> store = service.findTeacherById(id);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @GetMapping("/find-teachers-by-name")
-    public ResponseEntity<List<Teacher>> findTeachersByName(@RequestParam(required = false) String firstName,
+    public ResponseEntity<List<TeacherWrapper>> findTeachersByName(@RequestParam(required = false) String firstName,
                                                             @RequestParam(required = false) String secondName) {
-        Store<List<Teacher>> store = null;
-//        System.out.println("firstname="+firstName);
-//        System.out.println("secondname="+secondName);
-
-        if (firstName == null) {
-            store = service.findTeachersBySecondName(secondName);
-        } else if (secondName == null) {
-            store = service.findTeachersByFirstName(firstName);
-        } else {
-            store = service.findTeachersByName(firstName, secondName);
-        }
+        Store<List<TeacherWrapper>> store = null;
+//
+        store = service.findTeachersByName(firstName, secondName);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
-    @GetMapping("/find-teachers-by-subject")
-    public ResponseEntity<List<Teacher>> findTeachersBySubject(@RequestParam String subject) {
-        Store<List<Teacher>> store = service.findTeachersBySubject(subject);
+    @GetMapping("/find-teachers-by-father-name")
+    public ResponseEntity<List<TeacherWrapper>> findTeachersByFatherName(@RequestParam(required = false) String firstName,
+                                                                   @RequestParam(required = false) String secondName) {
+        Store<List<TeacherWrapper>> store = null;
+//
+        store = service.findTeachersByFatherName(firstName, secondName);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
+
+    @GetMapping("/find-teachers-by-mother-name")
+    public ResponseEntity<List<TeacherWrapper>> findTeachersByMotherName(@RequestParam(required = false) String firstName,
+                                                                   @RequestParam(required = false) String secondName) {
+        Store<List<TeacherWrapper>> store = null;
+//
+        store = service.findTeachersByMotherName(firstName, secondName);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
+//    @GetMapping("/find-teachers-by-subject")
+//    public ResponseEntity<List<TeacherWrapper>> findTeachersBySubject(@RequestParam String subject) {
+//        Store<List<TeacherWrapper>> store = service.findTeachersBySubject(subject);
+//
+//        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+//    }
 
     @DeleteMapping("/delete-teacher-by-id")
     public ResponseEntity<String> deleteTeacherById(@RequestParam String id) {
@@ -77,10 +91,10 @@ public class TeacherController {
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
-    @DeleteMapping("/delete-teachers-by-subject")
-    public ResponseEntity<String> deleteTeachersBySubject(@RequestParam String subject) {
-        Store<String> store = service.removeTeacherBySubject(subject);
-
-        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
-    }
+//    @DeleteMapping("/delete-teachers-by-subject")
+//    public ResponseEntity<String> deleteTeachersBySubject(@RequestParam String subject) {
+//        Store<String> store = service.removeTeacherBySubject(subject);
+//
+//        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+//    }
 }

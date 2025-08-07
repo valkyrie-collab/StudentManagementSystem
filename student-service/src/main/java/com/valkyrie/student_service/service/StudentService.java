@@ -1,6 +1,7 @@
 package com.valkyrie.student_service.service;
 
 import com.valkyrie.student_service.feign.MarksFeignController;
+import com.valkyrie.student_service.feign.TeacherFeignController;
 import com.valkyrie.student_service.model.*;
 import com.valkyrie.student_service.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class StudentService {
 //            .setEnrolment(null).setFatherSecondName("null").setMotherFirstName("null").setMotherSecondName("null")
 //            .setPassOut(null).setDob(null).setRole((byte)-1).setContact(-1L).setSection('N').setStander("null")
 //            .setClassTeacherId("null").setClassTeacherName("null");
-    private static final BCryptPasswordEncoder ENCODER = new BCryptPasswordEncoder(12);
+//    private static final BCryptPasswordEncoder ENCODER = new BCryptPasswordEncoder(12);
 
     private static final List<StudentWrapper> studentWrappers = new LinkedList<>();
 
@@ -33,6 +34,10 @@ public class StudentService {
     private MarksFeignController marksFeign;
     @Autowired
     private void setMarksFeign(MarksFeignController marksFeign) {this.marksFeign = marksFeign;}
+
+    private TeacherFeignController teacherFeign;
+    @Autowired
+    private void setTeacherFeign(TeacherFeignController teacherFeign) {this.teacherFeign = teacherFeign;}
 
     private String[] getFirstSecondName(String firstName, String secondName) {
 
@@ -107,9 +112,8 @@ public class StudentService {
         return new StudentWrapper().setBloodGroup(student.getBloodGroup())
                 .setContact(student.getContact()).setDob(student.getDob())
                 .setEnrolment(student.getEnrolment()).setId(student.getId())
-                .setClassTeacherId(student.getClassTeacherId()).setClassTeacherName(
-                        student.getClassTeacherName()
-                ).setFatherFirstName(student.getFatherFirstName())
+                .setClassTeacherId(student.getClassTeacherId())
+                .setFatherFirstName(student.getFatherFirstName())
                 .setFatherSecondName(student.getFatherSecondName())
                 .setMotherFirstName(student.getMotherFirstName())
                 .setMotherSecondName(student.getMotherSecondName())
@@ -137,8 +141,14 @@ public class StudentService {
             String[] modifiedMotherName = getFirstSecondName(
                     student.getMotherFirstName(), student.getMotherSecondName()
             );
+            ResponseEntity<TeacherWrapper> teacher =
+                    teacherFeign.findTeacherById(student.getClassTeacherId());
 
             if (modifiedName[0] == null ||
+                    (!teacher.getStatusCode().equals(
+                                    HttpStatusCode.valueOf(200)
+                            ) && teacher.getBody() == null
+                    ) ||
                     modifiedFatherName[0] == null || modifiedMotherName[0] == null) {
                 return Store.initialize(HttpStatus.BAD_REQUEST, List.of("There is problem with name"));
             }
@@ -199,21 +209,21 @@ public class StudentService {
                 Store.initialize(HttpStatus.BAD_REQUEST, studentWrappers);
     }
 
-    @Transactional
-    public Store<List<StudentWrapper>> findStudentsByClassTeacherName(String classTeacherName) {
-        List<Student> students = repo.findAllByClassTeacherName(classTeacherName);
-
-        if (!students.isEmpty()) {
-
-            for (Student student : students) {
-                studentWrappers.add(getWrapper(student));
-            }
-
-        }
-
-        return !students.isEmpty()? Store.initialize(HttpStatus.OK, studentWrappers) :
-                Store.initialize(HttpStatus.BAD_REQUEST, studentWrappers);
-    }
+//    @Transactional
+//    public Store<List<StudentWrapper>> findStudentsByClassTeacherName(String classTeacherName) {
+//        List<Student> students = repo.findAllByClassTeacherName(classTeacherName);
+//
+//        if (!students.isEmpty()) {
+//
+//            for (Student student : students) {
+//                studentWrappers.add(getWrapper(student));
+//            }
+//
+//        }
+//
+//        return !students.isEmpty()? Store.initialize(HttpStatus.OK, studentWrappers) :
+//                Store.initialize(HttpStatus.BAD_REQUEST, studentWrappers);
+//    }
 
     @Transactional
     public Store<List<StudentWrapper>> findStudentByName(String firstName, String secondName) {

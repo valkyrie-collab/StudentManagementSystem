@@ -19,10 +19,6 @@ import com.valkyrie.teacher_service.repository.TeacherRepository;
 @Service
 public class TeacherService {
     private String[] modifiedName;
-
-    private static final Teacher defaultTeacher = new Teacher().setId("null").setFirstName("null")
-            .setSecondName("null").setQualification("null").setAge((byte) 0)
-            .setDob(null).setSalary(0).setSubjects(null);
     
     private TeacherRepository repo;
     @Autowired
@@ -174,22 +170,40 @@ public class TeacherService {
     }
 
     //find
-    public Store<Teacher> findTeacherById(String id) {
+    public Store<TeacherWrapper> findTeacherById(String id) {
 //        id = new String(Base64.getDecoder().decode(id));
         Teacher teacher = repo.findById(id).orElse(null);
 
-        return teacher == null? Store.initialize(HttpStatus.BAD_REQUEST, defaultTeacher) : 
-                                Store.initialize(HttpStatus.OK, teacher);
+        if (teacher == null) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, null);
+        }
+
+        TeacherWrapper wrapper = getWrapper(teacher);
+
+        return Store.initialize(HttpStatus.OK, wrapper);
     }
 
     public Store<List<TeacherWrapper>> findTeachersByName(String firstName, String secondName) {
         modifiedName = getFirstSecondName(firstName, secondName);
 
+        List<Teacher> teachers = new ArrayList<>();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        if (firstName != null && secondName != null) {
+            teachers = repo.findAllByName(modifiedName[0], modifiedName[1]);
+            status = HttpStatus.OK;
+        } else if (firstName != null) {
+            teachers = repo.findAllByFirstName(modifiedName[0]);
+            status = HttpStatus.OK;
+        } else if (secondName != null) {
+            teachers = repo.findAllBySecondName(modifiedName[0]);
+            status = HttpStatus.OK;
+        }
+
         if (modifiedName[0] == null) {
             return Store.initialize(HttpStatus.BAD_REQUEST, null);
         }
 
-        List<Teacher> teachers = repo.findAllByName(modifiedName[0], modifiedName[1]);
         List<TeacherWrapper> teachersList = new ArrayList<>();
 
         if (teachers.isEmpty()) {
@@ -203,6 +217,7 @@ public class TeacherService {
         return Store.initialize(HttpStatus.OK, teachersList);
     }
 
+    @Transactional
     public Store<List<TeacherWrapper>> findTeachersByFatherName(String fatherFirstName,
                                                          String fatherSecondName) {
         modifiedName = getFirstSecondName(fatherFirstName, fatherSecondName);
@@ -217,7 +232,7 @@ public class TeacherService {
             teachers = repo.findAllByFatherFirstName(modifiedName[0]);
             status = HttpStatus.OK;
         } else if (fatherSecondName != null) {
-            teachers = repo.findAllByFatherSecondName(modifiedName[1]);
+            teachers = repo.findAllByFatherSecondName(modifiedName[0]);
             status = HttpStatus.OK;
         }
 
@@ -252,7 +267,7 @@ public class TeacherService {
             teachers = repo.findAllByMotherFirstName(modifiedName[0]);
             status = HttpStatus.OK;
         } else if (motherSecondName != null) {
-            teachers = repo.findAllByMotherSecondName(modifiedName[1]);
+            teachers = repo.findAllByMotherSecondName(modifiedName[0]);
             status = HttpStatus.OK;
         }
 
@@ -282,7 +297,7 @@ public class TeacherService {
 
     //delete
     public Store<String> removeTeacherById(String id) {
-        id = new String(Base64.getDecoder().decode(id));
+//        id = new String(Base64.getDecoder().decode(id));
         
         if (repo.findById(id).orElse(null) == null) {
             return Store.initialize(HttpStatus.OK, "The Teacher with Id = " + id + " has already been removed...");

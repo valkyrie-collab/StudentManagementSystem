@@ -1,7 +1,4 @@
-package com.valkyrie.teacher_service.model;
-
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embedded;
+package com.valkyrie.student_service.model;
 
 import java.util.Date;
 import java.util.List;

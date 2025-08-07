@@ -32,7 +32,7 @@ public class Student {
     @Embedded //will become column in the same table
     private Image image;
     private String classTeacherId;
-    private String classTeacherName;
+//    private String classTeacherName;
 
     public String getId() {return id;}
 
@@ -70,7 +70,7 @@ public class Student {
 
     public String getClassTeacherId() {return classTeacherId;}
 
-    public String getClassTeacherName() {return classTeacherName;}
+//    public String getClassTeacherName() {return classTeacherName;}
 
     public Student setId(String id) {
         this.id = id;
@@ -162,15 +162,15 @@ public class Student {
         return this;
     }
 
-    public Student setClassTeacherName(String classTeacherName) {
-        this.classTeacherName = classTeacherName;
-        return this;
-    }
+//    public Student setClassTeacherName(String classTeacherName) {
+//        this.classTeacherName = classTeacherName;
+//        return this;
+//    }
 
     @Override
     public String toString() {
         return id + firstName + secondName + fatherFirstName + fatherSecondName +
                 motherFirstName + motherSecondName + enrolment + passOut + classTeacherId +
-                stander + section + role + contact + subjectId + dob + bloodGroup + classTeacherName;
+                stander + section + role + contact + subjectId + dob + bloodGroup ;
     }
 }

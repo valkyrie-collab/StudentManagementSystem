@@ -73,12 +73,12 @@ public class StudentController {
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
-    @GetMapping("/find-students-by-teacher-name")
-    public ResponseEntity<List<StudentWrapper>> findByTeacherName(@RequestParam String teacherName) {
-        Store<List<StudentWrapper>> store = service.findStudentsByClassTeacherName(teacherName);
-
-        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
-    }
+//    @GetMapping("/find-students-by-teacher-name")
+//    public ResponseEntity<List<StudentWrapper>> findByTeacherName(@RequestParam String teacherName) {
+//        Store<List<StudentWrapper>> store = service.findStudentsByClassTeacherName(teacherName);
+//
+//        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+//    }
 
     @DeleteMapping("/delete-student-by-id")
     public ResponseEntity<String> deleteStudentById(@RequestParam String id) {
