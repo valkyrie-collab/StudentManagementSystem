@@ -22,8 +22,7 @@ public class StudentWrapper {
     private Date dob;
     private String bloodGroup;
     private Image image;
-    private String classTeacherId;
-    private String classTeacherName;
+    private TeacherWrapper teacherWrapper;
 
     public String getId() {return id;}
 
@@ -59,9 +58,7 @@ public class StudentWrapper {
 
     public Image getImage() {return image;}
 
-    public String getClassTeacherId() {return classTeacherId;}
-
-    public String getClassTeacherName() {return classTeacherName;}
+    public TeacherWrapper getClassTeacher() {return teacherWrapper;}
 
     public StudentWrapper setId(String id) {
         this.id = id;
@@ -148,13 +145,8 @@ public class StudentWrapper {
         return this;
     }
 
-    public StudentWrapper setClassTeacherId(String classTeacherId) {
-        this.classTeacherId = classTeacherId;
-        return this;
-    }
-
-    public StudentWrapper setClassTeacherName(String classTeacherName) {
-        this.classTeacherName = classTeacherName;
+    public StudentWrapper setClassTeacher(TeacherWrapper teacherWrapper) {
+        this.teacherWrapper = teacherWrapper;
         return this;
     }
 }

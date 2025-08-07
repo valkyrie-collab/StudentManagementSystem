@@ -170,6 +170,7 @@ public class TeacherService {
     }
 
     //find
+    @Transactional
     public Store<TeacherWrapper> findTeacherById(String id) {
 //        id = new String(Base64.getDecoder().decode(id));
         Teacher teacher = repo.findById(id).orElse(null);
@@ -183,6 +184,29 @@ public class TeacherService {
         return Store.initialize(HttpStatus.OK, wrapper);
     }
 
+    @Transactional
+    public Store<String> checkTeacherById(String id) {
+        Teacher teacher = repo.findById(id).orElse(null);
+
+        if (teacher == null) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, "Not found");
+        }
+
+        return Store.initialize(HttpStatus.OK, "Found teacher");
+    }
+
+    @Transactional
+    public Store<String> findTeacherByClass(String classTeacher) {
+        Teacher teacher = repo.findByClassTeacher(classTeacher);
+
+        if (teacher == null) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, null);
+        }
+
+        return Store.initialize(HttpStatus.OK, teacher.getId());
+    }
+
+    @Transactional
     public Store<List<TeacherWrapper>> findTeachersByName(String firstName, String secondName) {
         modifiedName = getFirstSecondName(firstName, secondName);
 
@@ -253,6 +277,7 @@ public class TeacherService {
         return Store.initialize(HttpStatus.OK, teachersList);
     }
 
+    @Transactional
     public Store<List<TeacherWrapper>> findTeachersByMotherName(String motherFirstName,
                                                          String motherSecondName) {
         modifiedName = getFirstSecondName(motherFirstName, motherSecondName);

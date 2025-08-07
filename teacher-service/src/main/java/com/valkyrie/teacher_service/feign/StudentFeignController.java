@@ -11,7 +11,7 @@ import java.util.List;
 @FeignClient("STUDENT-SERVICE")
 public interface StudentFeignController {
 
-    @GetMapping("/find-students-by-teacher-id")
+    @GetMapping("/student/find-students-by-teacher-id")
     ResponseEntity<List<StudentWrapper>> findByTeacherId(@RequestParam String teacherId);
 
     @GetMapping("/find-students-by-teacher-name")

@@ -40,6 +40,20 @@ public class TeacherController {
         return save(teachers);
     }
 
+    @GetMapping("/check-for-teacher")
+    public ResponseEntity<String> checkForTeacher(@RequestParam String id) {
+        Store<String> store = service.checkTeacherById(id);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
+    @GetMapping("/find-teacher-by-class")
+    public ResponseEntity<String> findTeacherId(@RequestParam String classTeacher) {
+        Store<String> store = service.findTeacherByClass(classTeacher);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
     @GetMapping("/find-teacher-by-id")
     public ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id) {
         Store<TeacherWrapper> store = service.findTeacherById(id);

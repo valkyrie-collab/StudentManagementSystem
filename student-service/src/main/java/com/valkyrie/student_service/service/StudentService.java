@@ -108,24 +108,28 @@ public class StudentService {
 
     private StudentWrapper getWrapper(Student student) {
         ResponseEntity<MarksWrapper> marks = marksFeign.findByStudentId(student.getId());
+        ResponseEntity<TeacherWrapper> teacher = teacherFeign.findTeacherById(student.getClassTeacherId());
 
         return new StudentWrapper().setBloodGroup(student.getBloodGroup())
                 .setContact(student.getContact()).setDob(student.getDob())
                 .setEnrolment(student.getEnrolment()).setId(student.getId())
-                .setClassTeacherId(student.getClassTeacherId())
                 .setFatherFirstName(student.getFatherFirstName())
                 .setFatherSecondName(student.getFatherSecondName())
                 .setMotherFirstName(student.getMotherFirstName())
                 .setMotherSecondName(student.getMotherSecondName())
                 .setFirstName(student.getFirstName())
                 .setSecondName(student.getSecondName()).setImage(student.getImage())
+                .setPassOut(student.getPassOut()).setRole(student.getRole())
+                .setSection(student.getSection()).setStander(student.getStander())
                 .setMarks(
                         (marks.getStatusCode().equals(HttpStatusCode.valueOf(200))?
                                 marks.getBody() : null
                         )
-                )
-                .setPassOut(student.getPassOut()).setRole(student.getRole())
-                .setSection(student.getSection()).setStander(student.getStander());
+                ).setClassTeacher(
+                        (teacher.getStatusCode().equals(HttpStatusCode.valueOf(200))?
+                                teacher.getBody() : null
+                        )
+                );
 
     }
 
@@ -134,6 +138,7 @@ public class StudentService {
 
         for (Student student : students) {
             boolean check = student.getId() == null;
+            boolean checkTeacherId = student.getClassTeacherId() == null;
             String[] modifiedName = getFirstSecondName(student.getFirstName(), student.getSecondName());
             String[] modifiedFatherName = getFirstSecondName(
                     student.getFatherFirstName(), student.getFatherSecondName()
@@ -141,8 +146,15 @@ public class StudentService {
             String[] modifiedMotherName = getFirstSecondName(
                     student.getMotherFirstName(), student.getMotherSecondName()
             );
-            ResponseEntity<TeacherWrapper> teacher =
-                    teacherFeign.findTeacherById(student.getClassTeacherId());
+            String classRoom = teacherFeign.findTeacherId(
+                    (student.getStander() + student.getSection())).getBody();
+
+            if (classRoom == null || classRoom.isEmpty()) {
+                return Store.initialize(HttpStatus.BAD_REQUEST, new ArrayList<>());
+            }
+
+            ResponseEntity<String> teacher =
+                    teacherFeign.checkForTeacher(classRoom);
 
             if (modifiedName[0] == null ||
                     (!teacher.getStatusCode().equals(
@@ -160,9 +172,9 @@ public class StudentService {
                     .setMotherFirstName(modifiedMotherName[0])
                     .setMotherSecondName(modifiedMotherName[1]);
 
-            if (check) {
+            if (check && checkTeacherId) {
                 String uuid = UUID.randomUUID().toString();
-                student = student.setId(uuid);
+                student = student.setId(uuid).setClassTeacherId(classRoom);
                 repo.save(student);
                 message.add("The Student With ID = " + uuid + " has been added successfully...");
             } else if (!repo.findById(student.getId()).orElse(student).toString().equals(student.toString())) {
@@ -336,7 +348,7 @@ public class StudentService {
 
     //DeleteStudent
     public Store<String> deleteStudentById(String id) {
-        id = new String(Base64.getDecoder().decode(id));
+//        id = new String(Base64.getDecoder().decode(id));
 
         if (repo.findById(id).orElse(null) == null) {
             return Store.initialize(HttpStatus.OK,
@@ -364,10 +376,10 @@ public class StudentService {
 
         return repo.findAllByStanderAndSection(stander, section).isEmpty()?
                 Store.initialize(HttpStatus.OK,
-                        "All the Student in the Section = " + section +
+                        "All the Student in the stander = " + stander +
                                 " and Section = " + section + " has been removed successfully") :
                 Store.initialize(HttpStatus.BAD_REQUEST,
-                        "All the Student in the Section = " + section +
+                        "All the Student in the stander = " + stander +
                                 " and Section = " + section + " cannot be able to removed");
     }
 }

@@ -36,4 +36,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, String>{
     List<Teacher> findAllByMotherFirstName(String motherFirstName);
 
     List<Teacher> findAllByMotherSecondName(String motherSecondName);
+
+    Teacher findByClassTeacher(String classTeacher);
 }
