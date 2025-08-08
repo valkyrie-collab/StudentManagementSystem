@@ -33,7 +33,7 @@ public class MarksService {
                 .setEnglishI(presentMarks.getEnglishI()).setEnglishII(presentMarks.getEnglishII())
                 .setGeography(presentMarks.getGeography()).setGsc(presentMarks.getGsc()).setGk(presentMarks.getGk())
                 .setHindi(presentMarks.getHindi()).setMaths(presentMarks.getMaths()).setMsc(presentMarks.getMsc())
-                .setPhysics(presentMarks.getPhysics()).setSst(presentMarks.getSst());
+                .setPhysics(presentMarks.getPhysics()).setSst(presentMarks.getSst()).setTerm(presentMarks.getTerm());
     }
 
     //save&update
@@ -56,16 +56,18 @@ public class MarksService {
         if (check && checkTerm && checkStudent.getBody()) {
             String term = null;
 
-            if (currentDate.isAfter(january) && currentDate.isBefore(April)) {
-                term = "1st-Term";
-            } else if (currentDate.isAfter(April) && currentDate.isBefore(August)) {
+            if (currentDate.isAfter(August)) {
+                term = "3rd-Term";
+            } else if (currentDate.isAfter(April)) {
                 term = "2nd-Term";
-            } else if (currentDate.isAfter(August) && currentDate.isBefore(December)) {
-                term = "3nd-Term";
+            } else if (currentDate.isAfter(january)) {
+                term = "1st-Term";
+            } else {
+                term = "no valid";
             }
 
             repo.save(marks.setId(UUID.randomUUID().toString())
-                    .setStudentId(marks.getStudentId())).setTerm(term);
+                    .setStudentId(marks.getStudentId()).setTerm(term));
             return Store.initialize(HttpStatus.ACCEPTED, "Marks has been added successfully....");
         } else if (marks.toString().equals(repo.findById(marks.getId()).orElse(marks).toString())) {
             repo.save(marks);
@@ -76,20 +78,25 @@ public class MarksService {
     }
 
     //find
-    public Store<MarksWrapper> findMarksByStudentId(String studentId) {
-        studentId = new String(Base64.getDecoder().decode(studentId));
-        Marks presentMarks = repo.findByStudentId(studentId);
+    public Store<List<MarksWrapper>> findMarksByStudentId(String studentId) {
+//        studentId = new String(Base64.getDecoder().decode(studentId));
+        List<Marks> presentMarks = repo.findByStudentId(studentId);
+        List<MarksWrapper> wrappers = new ArrayList<>();
 
-        if (presentMarks == null) {
-            return Store.initialize(HttpStatus.BAD_REQUEST, null);
+        if (presentMarks == null || presentMarks.isEmpty()) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, wrappers);
         }
 
-        return Store.initialize(HttpStatus.OK, getMarks(presentMarks));
+        for (Marks marks : presentMarks) {
+            wrappers.add(getMarks(marks));
+        }
+
+        return Store.initialize(HttpStatus.OK, wrappers);
     }
 
     public Store<MarksWrapper> findMarksByMarksId(String id) {
-        id = new String(Base64.getDecoder().decode(id));
-        Marks presentMarks = repo.findByStudentId(id);
+//        id = new String(Base64.getDecoder().decode(id));
+        Marks presentMarks = repo.findById(id).orElse(null);
 
         if (presentMarks == null) {
             return Store.initialize(HttpStatus.BAD_REQUEST, null);
@@ -120,7 +127,7 @@ public class MarksService {
         List<String> message = new ArrayList<>();
 
         for (String id : ids) {
-            id = new String(Base64.getDecoder().decode(id));
+//            id = new String(Base64.getDecoder().decode(id));
             if (repo.findByStudentId(id) == null) {
                 message.add("No Marks was there for student with ID = " + id +
                         " either it is already been deleted or check the ID......");

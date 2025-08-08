@@ -17,6 +17,7 @@ public class MarksWrapper {
     private Integer geography;
     private Integer gsc;
     private Integer sst;
+    private String term;
 
     public Integer getMaths() {return maths;}
 
@@ -45,6 +46,8 @@ public class MarksWrapper {
     public char getDrawing() {return drawing;}
 
     public Integer getGeography() {return geography;}
+
+    private String getTerm() {return term;}
 
     public Integer getGsc() {return gsc;}
 
@@ -117,6 +120,11 @@ public class MarksWrapper {
 
     public MarksWrapper setGeography(Integer geography) {
         this.geography = geography;
+        return this;
+    }
+
+    public MarksWrapper setTerm(String term) {
+        this.term = term;
         return this;
     }
 

@@ -1,8 +1,7 @@
 package com.valkyrie.teacher_service.model;
 
-import jakarta.persistence.Embedded;
-
 import java.util.Date;
+import java.util.List;
 
 public class StudentWrapper {
     private String id;
@@ -18,11 +17,11 @@ public class StudentWrapper {
     private char section;
     private byte role;
     private long contact;
-    private MarksWrapper marks;
+    private List<MarksWrapper> marks;
     private Date dob;
     private String bloodGroup;
-    @Embedded //will become column in the same table
     private Image image;
+    private TeacherWrapper teacherWrapper;
 
     public String getId() {return id;}
 
@@ -50,13 +49,15 @@ public class StudentWrapper {
 
     public long getContact() {return contact;}
 
-    public MarksWrapper getMarks() {return marks;}
+    public List<MarksWrapper> getMarks() {return marks;}
 
     public Date getDob() {return dob;}
 
     public String getBloodGroup() {return bloodGroup;}
 
     public Image getImage() {return image;}
+
+    public TeacherWrapper getClassTeacher() {return teacherWrapper;}
 
     public StudentWrapper setId(String id) {
         this.id = id;
@@ -128,7 +129,7 @@ public class StudentWrapper {
         return this;
     }
 
-    public StudentWrapper setMarks(MarksWrapper marks) {
+    public StudentWrapper setMarks(List<MarksWrapper> marks) {
         this.marks = marks;
         return this;
     }
@@ -140,6 +141,11 @@ public class StudentWrapper {
 
     public StudentWrapper setImage(Image image) {
         this.image = image;
+        return this;
+    }
+
+    public StudentWrapper setClassTeacher(TeacherWrapper teacherWrapper) {
+        this.teacherWrapper = teacherWrapper;
         return this;
     }
 }

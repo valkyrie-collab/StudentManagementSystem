@@ -106,9 +106,17 @@ public class StudentService {
         }
     }
 
-    private StudentWrapper getWrapper(Student student) {
-        ResponseEntity<MarksWrapper> marks = marksFeign.findByStudentId(student.getId());
-        ResponseEntity<TeacherWrapper> teacher = teacherFeign.findTeacherById(student.getClassTeacherId());
+    private StudentWrapper getWrapper(Student student, boolean doFeign) {
+        ResponseEntity<List<MarksWrapper>> marks = marksFeign.findByStudentId(student.getId());
+        System.out.println(student.getClassTeacherId());
+        ResponseEntity<TeacherWrapper> teacher = null;
+
+        if (!doFeign) {
+            teacher = teacherFeign.findTeacherById(student.getClassTeacherId(), false);
+            doFeign = true;
+        } else {
+            teacher = teacherFeign.findTeacherById(student.getClassTeacherId(), true);
+        }
 
         return new StudentWrapper().setBloodGroup(student.getBloodGroup())
                 .setContact(student.getContact()).setDob(student.getDob())
@@ -125,10 +133,9 @@ public class StudentService {
                         (marks.getStatusCode().equals(HttpStatusCode.valueOf(200))?
                                 marks.getBody() : null
                         )
-                ).setClassTeacher(
-                        (teacher.getStatusCode().equals(HttpStatusCode.valueOf(200))?
+                ).setClassTeacher(doFeign? (teacher.getStatusCode().equals(HttpStatusCode.valueOf(200))?
                                 teacher.getBody() : null
-                        )
+                        ) : null
                 );
 
     }
@@ -191,13 +198,13 @@ public class StudentService {
 
     //Find Student
     @Transactional
-    public Store<StudentWrapper> findStudentById(String id) {
+    public Store<StudentWrapper> findStudentById(String id, boolean doFeign) {
 //        id = new String(Base64.getDecoder().decode(id));
         Student student = repo.findById(id).orElse(null);
         StudentWrapper studentWrapper = null;
 
         if (student != null) {
-            studentWrapper = getWrapper(student);
+            studentWrapper = getWrapper(student, doFeign);
         }
 
         return student == null? Store.initialize(HttpStatus.BAD_REQUEST, studentWrapper) :
@@ -205,20 +212,21 @@ public class StudentService {
     }
 
     @Transactional
-    public Store<List<StudentWrapper>> findStudentsByClassTeacherId(String teacherId) {
+    public Store<List<StudentWrapper>> findStudentsByClassTeacherId(String teacherId, boolean doFeign) {
 //        teacherId = new String(Base64.getDecoder().decode(teacherId));
         List<Student> students = repo.findAllByClassTeacherId(teacherId);
+        System.out.println(students);
 
         if (!students.isEmpty()) {
 
             for (Student student : students) {
-                studentWrappers.add(getWrapper(student));
+                studentWrappers.add(getWrapper(student, doFeign));
             }
 
         }
 
         return !studentWrappers.isEmpty()? Store.initialize(HttpStatus.OK, studentWrappers) :
-                Store.initialize(HttpStatus.BAD_REQUEST, studentWrappers);
+                Store.initialize(HttpStatus.BAD_REQUEST, null);
     }
 
     @Transactional
@@ -249,7 +257,7 @@ public class StudentService {
 //    }
 
     @Transactional
-    public Store<List<StudentWrapper>> findStudentByName(String firstName, String secondName) {
+    public Store<List<StudentWrapper>> findStudentByName(String firstName, String secondName, boolean doFeign) {
         modifiedName = getFirstSecondName(firstName, secondName);
         List<Student> students = new ArrayList<>();
 
@@ -266,7 +274,7 @@ public class StudentService {
         if (!students.isEmpty()) {
 
             for (Student student : students) {
-                studentWrappers.add(getWrapper(student));
+                studentWrappers.add(getWrapper(student, doFeign));
             }
 
         }
@@ -277,7 +285,7 @@ public class StudentService {
 
     @Transactional
     public Store<List<StudentWrapper>> findStudentByFatherName(String fatherFirstName,
-                                                        String fatherSecondName) {
+                                                        String fatherSecondName, boolean doFeign) {
         modifiedName = getFirstSecondName(fatherFirstName, fatherSecondName);
         List<Student> students = new ArrayList<>();
 
@@ -294,7 +302,7 @@ public class StudentService {
         if (!students.isEmpty()) {
 
             for (Student student : students) {
-                studentWrappers.add(getWrapper(student));
+                studentWrappers.add(getWrapper(student, doFeign));
             }
 
         }
@@ -305,7 +313,7 @@ public class StudentService {
 
     @Transactional
     public Store<List<StudentWrapper>> findStudentByMotherName(String motherFirstName,
-                                                        String motherSecondName) {
+                                                        String motherSecondName, boolean doFeign) {
         modifiedName = getFirstSecondName(motherFirstName, motherSecondName);
         List<Student> students = new ArrayList<>();
 
@@ -322,7 +330,7 @@ public class StudentService {
         if (!students.isEmpty()) {
 
             for (Student student : students) {
-                studentWrappers.add(getWrapper(student));
+                studentWrappers.add(getWrapper(student, doFeign));
             }
 
         }
@@ -332,7 +340,7 @@ public class StudentService {
     }
 
     @Transactional
-    public Store<List<StudentWrapper>> findStudentByStanderAndSection(String stander, char section) {
+    public Store<List<StudentWrapper>> findStudentByStanderAndSection(String stander, char section, boolean doFeign) {
         List<Student> students = new ArrayList<>();
 
         if (stander != null && section < 'E') {
@@ -348,7 +356,7 @@ public class StudentService {
         if (!students.isEmpty()) {
 
             for (Student student : students) {
-                studentWrappers.add(getWrapper(student));
+                studentWrappers.add(getWrapper(student, doFeign));
             }
 
         }

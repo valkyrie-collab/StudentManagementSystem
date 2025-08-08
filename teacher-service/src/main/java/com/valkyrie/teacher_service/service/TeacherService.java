@@ -28,9 +28,11 @@ public class TeacherService {
     @Autowired
     private void setStudentFeign(StudentFeignController studentFeign) {this.studentFeign = studentFeign;}
 
-    private TeacherWrapper getWrapper(Teacher teacher) {
-
-        ResponseEntity<List<StudentWrapper>> students = studentFeign.findByTeacherId(teacher.getId());
+    private TeacherWrapper getWrapper(Teacher teacher, boolean doFeign) {
+        ResponseEntity<List<StudentWrapper>> students = null;
+        if (doFeign) {
+            students = studentFeign.findByTeacherId(teacher.getId(), false);
+        }
 
         return new TeacherWrapper().setClassTeacher(teacher.getClassTeacher())
                 .setAge(teacher.getAge()).setDateOfJoin(teacher.getDateOfJoin())
@@ -42,9 +44,9 @@ public class TeacherService {
                 .setFirstName(teacher.getFirstName()).setSecondName(teacher.getSecondName())
                 .setPassOutUniversity(teacher.getPassOutUniversity())
                 .setSalary(teacher.getSalary()).setSubjects(teacher.getSubjects())
-                .setQualification(teacher.getQualification()).setStudent(
-                        students.getStatusCode().equals(HttpStatusCode.valueOf(200))?
-                                students.getBody() : null
+                .setQualification(teacher.getQualification())
+                .setStudent(doFeign? (students.getStatusCode().equals(HttpStatusCode.valueOf(200))?
+                                students.getBody() : null) : null
                 );
     }
 
@@ -171,7 +173,7 @@ public class TeacherService {
 
     //find
     @Transactional
-    public Store<TeacherWrapper> findTeacherById(String id) {
+    public Store<TeacherWrapper> findTeacherById(String id, boolean doFeign) {
 //        id = new String(Base64.getDecoder().decode(id));
         Teacher teacher = repo.findById(id).orElse(null);
 
@@ -179,7 +181,7 @@ public class TeacherService {
             return Store.initialize(HttpStatus.BAD_REQUEST, null);
         }
 
-        TeacherWrapper wrapper = getWrapper(teacher);
+        TeacherWrapper wrapper = getWrapper(teacher, doFeign);
 
         return Store.initialize(HttpStatus.OK, wrapper);
     }
@@ -207,7 +209,8 @@ public class TeacherService {
     }
 
     @Transactional
-    public Store<List<TeacherWrapper>> findTeachersByName(String firstName, String secondName) {
+    public Store<List<TeacherWrapper>> findTeachersByName(String firstName,
+                                                          String secondName, boolean doFeign) {
         modifiedName = getFirstSecondName(firstName, secondName);
 
         List<Teacher> teachers = new ArrayList<>();
@@ -235,7 +238,7 @@ public class TeacherService {
         }
 
         for (Teacher teacher : teachers) {
-            teachersList.add(getWrapper(teacher));
+            teachersList.add(getWrapper(teacher, doFeign));
         }
 
         return Store.initialize(HttpStatus.OK, teachersList);
@@ -243,7 +246,7 @@ public class TeacherService {
 
     @Transactional
     public Store<List<TeacherWrapper>> findTeachersByFatherName(String fatherFirstName,
-                                                         String fatherSecondName) {
+                                                         String fatherSecondName, boolean doFeign) {
         modifiedName = getFirstSecondName(fatherFirstName, fatherSecondName);
 
         List<Teacher> teachers = new ArrayList<>();
@@ -271,7 +274,7 @@ public class TeacherService {
         }
 
         for (Teacher teacher : teachers) {
-            teachersList.add(getWrapper(teacher));
+            teachersList.add(getWrapper(teacher, doFeign));
         }
 
         return Store.initialize(HttpStatus.OK, teachersList);
@@ -279,7 +282,7 @@ public class TeacherService {
 
     @Transactional
     public Store<List<TeacherWrapper>> findTeachersByMotherName(String motherFirstName,
-                                                         String motherSecondName) {
+                                                         String motherSecondName, boolean doFeign) {
         modifiedName = getFirstSecondName(motherFirstName, motherSecondName);
 
         List<Teacher> teachers = new ArrayList<>();
@@ -307,7 +310,7 @@ public class TeacherService {
         }
 
         for (Teacher teacher : teachers) {
-            teachersList.add(getWrapper(teacher));
+            teachersList.add(getWrapper(teacher, doFeign));
         }
 
         return Store.initialize(HttpStatus.OK, teachersList);

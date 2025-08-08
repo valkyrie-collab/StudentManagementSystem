@@ -1,7 +1,6 @@
 package com.valkyrie.student_service.model;
 
-import jakarta.persistence.Embedded;
-
+import java.util.List;
 import java.util.Date;
 
 public class StudentWrapper {
@@ -18,7 +17,7 @@ public class StudentWrapper {
     private char section;
     private byte role;
     private long contact;
-    private MarksWrapper marks;
+    private List<MarksWrapper> marks;
     private Date dob;
     private String bloodGroup;
     private Image image;
@@ -50,7 +49,7 @@ public class StudentWrapper {
 
     public long getContact() {return contact;}
 
-    public MarksWrapper getMarks() {return marks;}
+    public List<MarksWrapper> getMarks() {return marks;}
 
     public Date getDob() {return dob;}
 
@@ -130,7 +129,7 @@ public class StudentWrapper {
         return this;
     }
 
-    public StudentWrapper setMarks(MarksWrapper marks) {
+    public StudentWrapper setMarks(List<MarksWrapper> marks) {
         this.marks = marks;
         return this;
     }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface TeacherFeignController {
 
     @GetMapping("/teacher/find-teacher-by-id")
-    ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id);
+    ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id, @RequestParam boolean doFeign);
 
     @GetMapping("/teacher/check-for-teacher")
     ResponseEntity<String> checkForTeacher(@RequestParam String id);

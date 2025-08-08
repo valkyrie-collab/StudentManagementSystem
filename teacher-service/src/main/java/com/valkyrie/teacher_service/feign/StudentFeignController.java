@@ -12,7 +12,7 @@ import java.util.List;
 public interface StudentFeignController {
 
     @GetMapping("/student/find-students-by-teacher-id")
-    ResponseEntity<List<StudentWrapper>> findByTeacherId(@RequestParam String teacherId);
+    ResponseEntity<List<StudentWrapper>> findByTeacherId(@RequestParam String teacherId, @RequestParam boolean doFeign);
 
     @GetMapping("/find-students-by-teacher-name")
     ResponseEntity<List<StudentWrapper>> findByTeacherName(@RequestParam String teacherName);

@@ -55,38 +55,42 @@ public class TeacherController {
     }
 
     @GetMapping("/find-teacher-by-id")
-    public ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id) {
-        Store<TeacherWrapper> store = service.findTeacherById(id);
+    public ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id,
+                                                          @RequestParam boolean doFeign) {
+        Store<TeacherWrapper> store = service.findTeacherById(id, doFeign);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @GetMapping("/find-teachers-by-name")
     public ResponseEntity<List<TeacherWrapper>> findTeachersByName(@RequestParam(required = false) String firstName,
-                                                            @RequestParam(required = false) String secondName) {
+                                                            @RequestParam(required = false) String secondName,
+                                                                   @RequestParam boolean doFeign) {
         Store<List<TeacherWrapper>> store = null;
 //
-        store = service.findTeachersByName(firstName, secondName);
+        store = service.findTeachersByName(firstName, secondName, doFeign);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @GetMapping("/find-teachers-by-father-name")
     public ResponseEntity<List<TeacherWrapper>> findTeachersByFatherName(@RequestParam(required = false) String firstName,
-                                                                   @RequestParam(required = false) String secondName) {
+                                                                   @RequestParam(required = false) String secondName,
+                                                                         @RequestParam boolean doFeign) {
         Store<List<TeacherWrapper>> store = null;
 //
-        store = service.findTeachersByFatherName(firstName, secondName);
+        store = service.findTeachersByFatherName(firstName, secondName, doFeign);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @GetMapping("/find-teachers-by-mother-name")
     public ResponseEntity<List<TeacherWrapper>> findTeachersByMotherName(@RequestParam(required = false) String firstName,
-                                                                   @RequestParam(required = false) String secondName) {
+                                                                   @RequestParam(required = false) String secondName,
+                                                                         @RequestParam boolean doFeign) {
         Store<List<TeacherWrapper>> store = null;
 //
-        store = service.findTeachersByMotherName(firstName, secondName);
+        store = service.findTeachersByMotherName(firstName, secondName, doFeign);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }

@@ -28,8 +28,8 @@ public class MarksController {
     public ResponseEntity<String> update(@RequestBody Marks marks) {return save(marks);}
 
     @GetMapping("/find-marks-by-student-id")
-    public ResponseEntity<MarksWrapper> findByStudentId(@RequestParam String studentId) {
-        Store<MarksWrapper> store = service.findMarksByStudentId(studentId);
+    public ResponseEntity<List<MarksWrapper>> findByStudentId(@RequestParam String studentId) {
+        Store<List<MarksWrapper>> store = service.findMarksByStudentId(studentId);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }

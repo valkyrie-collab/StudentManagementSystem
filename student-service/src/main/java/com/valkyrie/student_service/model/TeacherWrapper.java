@@ -47,7 +47,7 @@ public class TeacherWrapper {
 
     public Image getImage() {return image;}
 
-    public Date getDate() {return dob;}
+    public Date getDob() {return dob;}
 
     public byte getAge() {return age;}
 

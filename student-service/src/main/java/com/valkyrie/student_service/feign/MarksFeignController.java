@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient("MARKS-SERVICE")
 public interface MarksFeignController {
 
     @GetMapping("/marks/find-marks-by-student-id")
-    ResponseEntity<MarksWrapper> findByStudentId(@RequestParam String studentId);
+    ResponseEntity<List<MarksWrapper>> findByStudentId(@RequestParam String studentId);
 }
