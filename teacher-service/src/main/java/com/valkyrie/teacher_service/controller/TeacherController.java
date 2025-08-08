@@ -18,6 +18,7 @@ import com.valkyrie.teacher_service.service.TeacherService;
 //import com.valkyrie.teacher_service.model.TeacherUpdater;
 
 //import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -42,6 +43,13 @@ public class TeacherController {
 
     @GetMapping("/check-for-teacher")
     public ResponseEntity<String> checkForTeacher(@RequestParam String id) {
+
+        try{
+            id = new String(Base64.getDecoder().decode(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<String> store = service.checkTeacherById(id);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
@@ -57,6 +65,13 @@ public class TeacherController {
     @GetMapping("/find-teacher-by-id")
     public ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id,
                                                           @RequestParam boolean doFeign) {
+
+        try{
+            id = new String(Base64.getDecoder().decode(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<TeacherWrapper> store = service.findTeacherById(id, doFeign);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
@@ -104,6 +119,13 @@ public class TeacherController {
 
     @DeleteMapping("/delete-teacher-by-id")
     public ResponseEntity<String> deleteTeacherById(@RequestParam String id) {
+
+        try{
+            id = new String(Base64.getDecoder().decode(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<String> store = service.removeTeacherById(id);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());

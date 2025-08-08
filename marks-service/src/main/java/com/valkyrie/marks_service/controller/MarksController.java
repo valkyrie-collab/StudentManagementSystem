@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,13 @@ public class MarksController {
 
     @GetMapping("/find-marks-by-student-id")
     public ResponseEntity<List<MarksWrapper>> findByStudentId(@RequestParam String studentId) {
+
+        try{
+            studentId = new String(Base64.getDecoder().decode(studentId));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<List<MarksWrapper>> store = service.findMarksByStudentId(studentId);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
@@ -36,6 +44,13 @@ public class MarksController {
 
     @GetMapping("/find-marks-by-marks-id")
     public ResponseEntity<MarksWrapper> findByMarksId(@RequestParam String id) {
+
+        try{
+            id = new String(Base64.getDecoder().decode(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<MarksWrapper> store = service.findMarksByMarksId(id);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());

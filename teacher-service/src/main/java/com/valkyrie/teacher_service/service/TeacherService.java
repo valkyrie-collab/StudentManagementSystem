@@ -31,7 +31,8 @@ public class TeacherService {
     private TeacherWrapper getWrapper(Teacher teacher, boolean doFeign) {
         ResponseEntity<List<StudentWrapper>> students = null;
         if (doFeign) {
-            students = studentFeign.findByTeacherId(teacher.getId(), false);
+            students = studentFeign.findByTeacherId(
+                    Base64.getEncoder().encodeToString(teacher.getId().getBytes()), false);
         }
 
         return new TeacherWrapper().setClassTeacher(teacher.getClassTeacher())

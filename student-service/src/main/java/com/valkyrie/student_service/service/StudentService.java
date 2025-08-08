@@ -25,8 +25,6 @@ public class StudentService {
 //            .setClassTeacherId("null").setClassTeacherName("null");
 //    private static final BCryptPasswordEncoder ENCODER = new BCryptPasswordEncoder(12);
 
-    private static final List<StudentWrapper> studentWrappers = new LinkedList<>();
-
     private StudentRepository repo;
     @Autowired
     private void setRepo(StudentRepository repo) {this.repo = repo;}
@@ -112,10 +110,12 @@ public class StudentService {
         ResponseEntity<TeacherWrapper> teacher = null;
 
         if (!doFeign) {
-            teacher = teacherFeign.findTeacherById(student.getClassTeacherId(), false);
+            teacher = teacherFeign.findTeacherById(
+                    Base64.getEncoder().encodeToString(student.getClassTeacherId().getBytes()), false);
             doFeign = true;
         } else {
-            teacher = teacherFeign.findTeacherById(student.getClassTeacherId(), true);
+            teacher = teacherFeign.findTeacherById(
+                    Base64.getEncoder().encodeToString(student.getClassTeacherId().getBytes()), true);
         }
 
         return new StudentWrapper().setBloodGroup(student.getBloodGroup())
@@ -154,7 +154,9 @@ public class StudentService {
                     student.getMotherFirstName(), student.getMotherSecondName()
             );
             String classRoom = teacherFeign.findTeacherId(
-                    (student.getStander() + student.getSection())).getBody();
+                    Base64.getEncoder().encodeToString(
+                            (student.getStander() + student.getSection()).getBytes()
+                    )).getBody();
 
             if (classRoom == null || classRoom.isEmpty()) {
                 return Store.initialize(HttpStatus.BAD_REQUEST, new ArrayList<>());
@@ -214,6 +216,7 @@ public class StudentService {
     @Transactional
     public Store<List<StudentWrapper>> findStudentsByClassTeacherId(String teacherId, boolean doFeign) {
 //        teacherId = new String(Base64.getDecoder().decode(teacherId));
+        List<StudentWrapper> studentWrappers = new LinkedList<>();
         List<Student> students = repo.findAllByClassTeacherId(teacherId);
         System.out.println(students);
 
@@ -259,6 +262,7 @@ public class StudentService {
     @Transactional
     public Store<List<StudentWrapper>> findStudentByName(String firstName, String secondName, boolean doFeign) {
         modifiedName = getFirstSecondName(firstName, secondName);
+        List<StudentWrapper> studentWrappers = new LinkedList<>();
         List<Student> students = new ArrayList<>();
 
         if (firstName != null && secondName != null) {
@@ -287,6 +291,7 @@ public class StudentService {
     public Store<List<StudentWrapper>> findStudentByFatherName(String fatherFirstName,
                                                         String fatherSecondName, boolean doFeign) {
         modifiedName = getFirstSecondName(fatherFirstName, fatherSecondName);
+        List<StudentWrapper> studentWrappers = new LinkedList<>();
         List<Student> students = new ArrayList<>();
 
         if (fatherFirstName != null && fatherSecondName != null) {
@@ -315,6 +320,7 @@ public class StudentService {
     public Store<List<StudentWrapper>> findStudentByMotherName(String motherFirstName,
                                                         String motherSecondName, boolean doFeign) {
         modifiedName = getFirstSecondName(motherFirstName, motherSecondName);
+        List<StudentWrapper> studentWrappers = new LinkedList<>();
         List<Student> students = new ArrayList<>();
 
         if (motherFirstName != null && motherSecondName != null) {
@@ -341,6 +347,7 @@ public class StudentService {
 
     @Transactional
     public Store<List<StudentWrapper>> findStudentByStanderAndSection(String stander, char section, boolean doFeign) {
+        List<StudentWrapper> studentWrappers = new LinkedList<>();
         List<Student> students = new ArrayList<>();
 
         if (stander != null && section < 'E') {

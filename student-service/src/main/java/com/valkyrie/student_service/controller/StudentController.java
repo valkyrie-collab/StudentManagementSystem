@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,13 @@ public class StudentController {
 
     @GetMapping("/find-student-by-id")
     public ResponseEntity<StudentWrapper> findById(@RequestParam String id, @RequestParam boolean doFeign) {
+
+        try{
+            id = new String(Base64.getDecoder().decode(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<StudentWrapper> store = service.findStudentById(id, doFeign);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
@@ -36,6 +44,13 @@ public class StudentController {
 
     @GetMapping("/check-student-present")
     public ResponseEntity<Boolean> checkStudentPresent(@RequestParam String id) {
+
+        try{
+            id = new String(Base64.getDecoder().decode(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<Boolean> store = service.checkStudentPresent(id);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
@@ -80,6 +95,13 @@ public class StudentController {
     @GetMapping("/find-students-by-teacher-id")
     public ResponseEntity<List<StudentWrapper>> findByTeacherId(@RequestParam String teacherId,
                                                                 @RequestParam boolean doFeign) {
+
+        try{
+            teacherId = new String(Base64.getDecoder().decode(teacherId));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<List<StudentWrapper>> store = service.findStudentsByClassTeacherId(teacherId, doFeign);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
@@ -94,6 +116,13 @@ public class StudentController {
 
     @DeleteMapping("/delete-student-by-id")
     public ResponseEntity<String> deleteStudentById(@RequestParam String id) {
+
+        try{
+            id = new String(Base64.getDecoder().decode(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         Store<String> store = service.deleteStudentById(id);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());

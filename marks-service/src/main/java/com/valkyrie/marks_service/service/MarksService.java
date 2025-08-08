@@ -40,7 +40,8 @@ public class MarksService {
     public Store<String> save(Marks marks) {
         boolean check = marks.getId() == null;
         boolean checkTerm = marks.getTerm() == null;
-        ResponseEntity<Boolean> checkStudent = studentFeign.checkStudentPresent(marks.getStudentId());
+        ResponseEntity<Boolean> checkStudent = studentFeign.checkStudentPresent(
+                Base64.getEncoder().encodeToString(marks.getStudentId().getBytes()));
 
         if (checkStudent == null || checkStudent.getBody() == null) {
             return Store.initialize(HttpStatus.BAD_REQUEST, "Marks not Saved");
@@ -127,7 +128,7 @@ public class MarksService {
         List<String> message = new ArrayList<>();
 
         for (String id : ids) {
-//            id = new String(Base64.getDecoder().decode(id));
+            id = new String(Base64.getDecoder().decode(id));
             if (repo.findByStudentId(id) == null) {
                 message.add("No Marks was there for student with ID = " + id +
                         " either it is already been deleted or check the ID......");
