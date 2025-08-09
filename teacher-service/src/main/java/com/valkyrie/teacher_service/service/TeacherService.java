@@ -119,44 +119,40 @@ public class TeacherService {
     }
 
     //save
-    public Store<String> save(List<Teacher> teachers) {
+    public Store<String> save(String id, Teacher teacher) {
         String operationPerformed = "non";
 
-        for (Teacher teacher : teachers) {
-            modifiedName = getFirstSecondName(
-                    teacher.getFirstName(), teacher.getSecondName()
-            );
-            String[] modifiedFatherName = getFirstSecondName(
-                    teacher.getFatherFirstName(), teacher.getFatherSecondName()
-            );
-            String[] modifiedMotherName = getFirstSecondName(
-                    teacher.getMotherFirstName(), teacher.getMotherSecondName()
-            );
+        modifiedName = getFirstSecondName(
+                teacher.getFirstName(), teacher.getSecondName()
+        );
+        String[] modifiedFatherName = getFirstSecondName(
+                teacher.getFatherFirstName(), teacher.getFatherSecondName()
+        );
+        String[] modifiedMotherName = getFirstSecondName(
+                teacher.getMotherFirstName(), teacher.getMotherSecondName()
+        );
 
-            if (modifiedName[0] != null ||
-                    modifiedFatherName[0] != null || modifiedMotherName[0] != null) {
-                teacher = teacher.setFirstName(modifiedName[0]).setSecondName(modifiedName[1])
-                        .setFatherFirstName(modifiedFatherName[0]).setFatherSecondName(modifiedFatherName[1])
-                        .setMotherFirstName(modifiedMotherName[0]).setMotherSecondName(modifiedMotherName[1]);
-                boolean presentId = teacher.getId() == null;
+        if (modifiedName[0] != null ||
+                modifiedFatherName[0] != null || modifiedMotherName[0] != null) {
+            teacher = teacher.setFirstName(modifiedName[0]).setSecondName(modifiedName[1])
+                    .setFatherFirstName(modifiedFatherName[0]).setFatherSecondName(modifiedFatherName[1])
+                    .setMotherFirstName(modifiedMotherName[0]).setMotherSecondName(modifiedMotherName[1]);
+            boolean presentId = teacher.getId() == null;
 
-                if (presentId) {
-                    if (operationPerformed.equals("non")) {
-                        operationPerformed = "save";
-                    }
-                    repo.save(teacher.setId(UUID.randomUUID().toString()));
+            if (presentId && id != null) {
+                operationPerformed = "save";
+                repo.save(teacher.setId(id));
 //                return Store.initialize(HttpStatus.ACCEPTED, "The Teacher saved successfully.....");
-                } else if (!repo.findById(teacher.getId()).orElse(teacher).toString().equals(teacher.toString())) {
-                    if (operationPerformed.equals("non")) {
-                        operationPerformed = "update";
-                    }
-                    repo.save(teacher);
+            } else if (id == null) {
+//                    && !repo.findById(teacher.getId()).orElse(teacher).toString().equals(teacher.toString())) {
+                operationPerformed = "update";
+                repo.save(teacher);
 //                return Store.initialize(HttpStatus.ACCEPTED, "Teacher Details has been updated......");
-                }
             } else {
                 operationPerformed = "non";
             }
-
+        } else {
+            operationPerformed = "non";
         }
 
         switch (operationPerformed) {

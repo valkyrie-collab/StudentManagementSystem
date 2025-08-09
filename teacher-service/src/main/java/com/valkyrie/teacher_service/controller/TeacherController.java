@@ -34,16 +34,25 @@ public class TeacherController {
     private void setConfig(TokenConfiguration config) {this.config = config;}
 
     @PostMapping("/save-teacher")
-    public ResponseEntity<String> save(@RequestBody List<Teacher> teachers) {
-        System.out.println("this is working");
-        Store<String> store = service.save(teachers);
+    public ResponseEntity<String> save(@RequestParam String token,
+                                       @RequestBody Teacher teacher) {
+//        System.out.println("this is working");
+        String id = token;
+        try {
+            id = config.getUsername(id);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+        Store<String> store = service.save(id, teacher);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @PostMapping("/update-teacher")
-    public ResponseEntity<String> update(@RequestBody List<Teacher> teachers) {
-        return save(teachers);
+    public ResponseEntity<String> update(@RequestBody Teacher teacher) {
+        Store<String> store = service.save(null, teacher);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @GetMapping("/check-for-teacher")

@@ -141,60 +141,59 @@ public class StudentService {
 
     }
 
-    public Store<List<String>> save(List<Student> students) {
-        List<String> message = new ArrayList<>(students.size());
+    public Store<List<String>> save(String id, Student student) {
+        List<String> message = new ArrayList<>();
 
-        for (Student student : students) {
-            boolean check = student.getId() == null;
-            boolean checkTeacherId = student.getClassTeacherId() == null;
-            String[] modifiedName = getFirstSecondName(student.getFirstName(), student.getSecondName());
-            String[] modifiedFatherName = getFirstSecondName(
-                    student.getFatherFirstName(), student.getFatherSecondName()
-            );
-            String[] modifiedMotherName = getFirstSecondName(
-                    student.getMotherFirstName(), student.getMotherSecondName()
-            );
-            String classRoom = teacherFeign.findTeacherId(
-                    (student.getStander() + student.getSection())).getBody();
+        boolean check = student.getId() == null;
+        boolean checkTeacherId = student.getClassTeacherId() == null;
+        String[] modifiedName = getFirstSecondName(student.getFirstName(), student.getSecondName());
+        String[] modifiedFatherName = getFirstSecondName(
+                student.getFatherFirstName(), student.getFatherSecondName()
+        );
+        String[] modifiedMotherName = getFirstSecondName(
+                student.getMotherFirstName(), student.getMotherSecondName()
+        );
+        String classRoom = teacherFeign.findTeacherId(
+                (student.getStander() + student.getSection())).getBody();
 
-            if (classRoom == null || classRoom.isEmpty()) {
-                return Store.initialize(HttpStatus.BAD_REQUEST, new ArrayList<>());
-            }
-
-            ResponseEntity<String> teacher =
-                    teacherFeign.checkForTeacher(null,
-                            Base64.getEncoder().encodeToString(classRoom.getBytes()));
-
-            if (modifiedName[0] == null ||
-                    (!teacher.getStatusCode().equals(
-                                    HttpStatusCode.valueOf(200)
-                            ) && teacher.getBody() == null
-                    ) ||
-                    modifiedFatherName[0] == null || modifiedMotherName[0] == null) {
-                return Store.initialize(HttpStatus.BAD_REQUEST, List.of("There is problem with name"));
-            }
-
-            student = student.setFirstName(modifiedName[0])
-                    .setSecondName(modifiedName[1])
-                    .setFatherFirstName(modifiedFatherName[0])
-                    .setFatherSecondName(modifiedFatherName[1])
-                    .setMotherFirstName(modifiedMotherName[0])
-                    .setMotherSecondName(modifiedMotherName[1]);
-
-            if (check && checkTeacherId) {
-                String uuid = UUID.randomUUID().toString();
-                student = student.setId(uuid).setClassTeacherId(classRoom);
-                repo.save(student);
-                message.add("The Student With ID = " + uuid + " has been added successfully...");
-            } else if (!repo.findById(student.getId()).orElse(student).toString().equals(student.toString())) {
-                repo.save(student.setClassTeacherId(classRoom));
-                message.add("The Student With ID = " + student.getId() + " has been updated successfully...");
-            } else {
-                message.add("The Student not updated/saved....");
-            }
+        if (classRoom == null || classRoom.isEmpty()) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, new ArrayList<>());
         }
 
-        return !students.isEmpty()? Store.initialize(HttpStatus.ACCEPTED, message) :
+        ResponseEntity<String> teacher =
+                teacherFeign.checkForTeacher(null,
+                        Base64.getEncoder().encodeToString(classRoom.getBytes()));
+
+        if (modifiedName[0] == null ||
+                (!teacher.getStatusCode().equals(
+                        HttpStatusCode.valueOf(200)
+                ) && teacher.getBody() == null
+                ) ||
+                modifiedFatherName[0] == null || modifiedMotherName[0] == null) {
+            return Store.initialize(HttpStatus.BAD_REQUEST, List.of("There is problem with name"));
+        }
+
+        student = student.setFirstName(modifiedName[0])
+                .setSecondName(modifiedName[1])
+                .setFatherFirstName(modifiedFatherName[0])
+                .setFatherSecondName(modifiedFatherName[1])
+                .setMotherFirstName(modifiedMotherName[0])
+                .setMotherSecondName(modifiedMotherName[1]);
+
+        if (check && checkTeacherId && id != null) {
+//            String uuid = UUID.randomUUID().toString();
+            student = student.setId(id).setClassTeacherId(classRoom);
+            repo.save(student);
+            message.add("The Student With ID = " + id + " has been added successfully...");
+        } else if (id == null) {
+//                && !repo.findById(student.getId()).orElse(student).toString().equals(student.toString())) {
+            repo.save(student.setClassTeacherId(classRoom));
+            message.add("The Student With ID = " + student.getId() + " has been updated successfully...");
+        } else {
+            message.add("The Student not updated/saved....");
+        }
+
+        return student != null? Store.initialize(HttpStatus.ACCEPTED, message) :
                 Store.initialize(HttpStatus.BAD_REQUEST, new ArrayList<>());
     }
 

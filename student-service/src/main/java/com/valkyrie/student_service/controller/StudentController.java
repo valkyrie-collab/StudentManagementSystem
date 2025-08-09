@@ -24,14 +24,25 @@ public class StudentController {
     private void setConfig(TokenConfiguration config) {this.config = config;}
 
     @PostMapping("/save-student")
-    public ResponseEntity<List<String>> save(@RequestBody List<Student> students) {
-        Store<List<String>> store = service.save(students);
+    public ResponseEntity<List<String>> save(@RequestParam String token,
+                                             @RequestBody Student student) {
+        String id = token;
+        try {
+            id = config.getUsername(id);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+        Store<List<String>> store = service.save(id, student);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @PostMapping("/update-student")
-    public ResponseEntity<List<String>> update(@RequestBody List<Student> students) {return save(students);}
+    public ResponseEntity<List<String>> update(@RequestBody Student student) {
+        Store<List<String>> store = service.save(null, student);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
 
     @GetMapping("/find-student-by-id")
     public ResponseEntity<StudentWrapper> findById(@RequestParam (required = false) String token,
