@@ -26,6 +26,8 @@ public class MarksService {
 
     private MarksWrapper getMarks(Marks presentMarks) {
 
+        System.out.println(presentMarks.getTerm());
+
         return new MarksWrapper().setBengali(presentMarks.getBengali())
                 .setHistoryAndCivics(presentMarks.getHistoryAndCivics())
                 .setBiology(presentMarks.getBiology()).setDrawing(presentMarks.getDrawing())
@@ -85,7 +87,7 @@ public class MarksService {
         List<MarksWrapper> wrappers = new ArrayList<>();
 
         if (presentMarks == null || presentMarks.isEmpty()) {
-            return Store.initialize(HttpStatus.BAD_REQUEST, wrappers);
+            return Store.initialize(HttpStatus.OK, wrappers);
         }
 
         for (Marks marks : presentMarks) {
@@ -133,7 +135,7 @@ public class MarksService {
                 message.add("No Marks was there for student with ID = " + id +
                         " either it is already been deleted or check the ID......");
             } else {
-                repo.deleteByStudentId(id);
+                repo.deleteAllByStudentId(id);
                 message.add("The Marks Related to the Student ID = " + id + " has been deleted successfully....");
             }
         }

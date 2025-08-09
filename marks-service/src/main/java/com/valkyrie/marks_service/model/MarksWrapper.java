@@ -47,7 +47,7 @@ public class MarksWrapper {
 
     public Integer getGeography() {return geography;}
 
-    private String getTerm() {return term;}
+    public String getTerm() {return term;}
 
     public Integer getGsc() {return gsc;}
 

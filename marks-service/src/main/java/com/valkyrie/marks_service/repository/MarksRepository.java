@@ -11,5 +11,7 @@ public interface MarksRepository extends JpaRepository<Marks, String> {
 
     List<Marks> findByStudentId(String studentId);
 
-    void deleteByStudentId(String id);
+//    void deleteByStudentId(String id);
+
+    void deleteAllByStudentId(String studentId);
 }

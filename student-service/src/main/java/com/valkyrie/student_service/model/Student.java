@@ -170,7 +170,7 @@ public class Student {
     @Override
     public String toString() {
         return id + firstName + secondName + fatherFirstName + fatherSecondName +
-                motherFirstName + motherSecondName + enrolment + passOut + classTeacherId +
+                motherFirstName + motherSecondName + enrolment + passOut +
                 stander + section + role + contact + subjectId + dob + bloodGroup ;
     }
 }

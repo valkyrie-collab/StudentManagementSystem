@@ -1,5 +1,6 @@
 package com.valkyrie.student_service.controller;
 
+import com.valkyrie.student_service.config.TokenConfiguration;
 import com.valkyrie.student_service.model.Student;
 import com.valkyrie.student_service.model.Store;
 import com.valkyrie.student_service.model.StudentWrapper;
@@ -18,6 +19,10 @@ public class StudentController {
     @Autowired
     private void setService(StudentService service) {this.service = service;}
 
+    private TokenConfiguration config;
+    @Autowired
+    private void setConfig(TokenConfiguration config) {this.config = config;}
+
     @PostMapping("/save-student")
     public ResponseEntity<List<String>> save(@RequestBody List<Student> students) {
         Store<List<String>> store = service.save(students);
@@ -29,10 +34,17 @@ public class StudentController {
     public ResponseEntity<List<String>> update(@RequestBody List<Student> students) {return save(students);}
 
     @GetMapping("/find-student-by-id")
-    public ResponseEntity<StudentWrapper> findById(@RequestParam String id, @RequestParam boolean doFeign) {
+    public ResponseEntity<StudentWrapper> findById(@RequestParam (required = false) String token,
+                                                   @RequestParam (required = false) String id,
+                                                   @RequestParam boolean doFeign) {
 
         try{
-            id = new String(Base64.getDecoder().decode(id));
+
+            if (id == null) {
+                id = config.getUsername(token);
+            } else {
+                id = new String(Base64.getDecoder().decode(id));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -43,10 +55,16 @@ public class StudentController {
     }
 
     @GetMapping("/check-student-present")
-    public ResponseEntity<Boolean> checkStudentPresent(@RequestParam String id) {
+    public ResponseEntity<Boolean> checkStudentPresent(@RequestParam (required = false) String token,
+                                                       @RequestParam (required = false) String id) {
 
         try{
-            id = new String(Base64.getDecoder().decode(id));
+
+            if (id == null) {
+                id = config.getUsername(token);
+            } else {
+                id = new String(Base64.getDecoder().decode(id));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -74,7 +92,7 @@ public class StudentController {
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
-    @GetMapping("/find-student-by-name")
+    @GetMapping("/find-students-by-name")
     public ResponseEntity<List<StudentWrapper>> findByName(@RequestParam(required = false) String firstName,
                                                     @RequestParam(required = false) String secondName,
                                                            @RequestParam boolean doFeign) {

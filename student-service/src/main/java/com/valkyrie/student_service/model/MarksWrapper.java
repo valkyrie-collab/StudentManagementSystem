@@ -1,111 +1,114 @@
 package com.valkyrie.student_service.model;
 
 public class MarksWrapper {
-    private int maths;
-    private int physics;
-    private int chemistry;
-    private int biology;
-    private int msc;
-    private int gk;
-    private int historyAndCivics;
-    private int bengali;
-    private int hindi;
-    private int computer;
-    private int englishI;
-    private int englishII;
+    private Integer maths;
+    private Integer physics;
+    private Integer chemistry;
+    private Integer biology;
+    private Integer msc;
+    private Integer gk;
+    private Integer historyAndCivics;
+    private Integer bengali;
+    private Integer hindi;
+    private Integer computer;
+    private Integer englishI;
+    private Integer englishII;
     private char drawing;
-    private int geography;
-    private int gsc;
-    private int sst;
+    private Integer geography;
+    private Integer gsc;
+    private Integer sst;
+    private String term;
 
-    public int getMaths() {return maths;}
+    public Integer getMaths() {return maths;}
 
-    public int getPhysics() {return physics;}
+    public Integer getPhysics() {return physics;}
 
-    public int getChemistry() {return chemistry;}
+    public Integer getChemistry() {return chemistry;}
 
-    public int getBiology() {return biology;}
+    public Integer getBiology() {return biology;}
 
-    public int getMsc() {return msc;}
+    public Integer getMsc() {return msc;}
 
-    public int getGk() {return gk;}
+    public Integer getGk() {return gk;}
 
-    public int getBengali() {return bengali;}
+    public Integer getBengali() {return bengali;}
 
-    public int getHindi() {return hindi;}
+    public Integer getHindi() {return hindi;}
 
-    public int getComputer() {return computer;}
+    public Integer getComputer() {return computer;}
 
-    public int getHistoryAndCivics() {return historyAndCivics;}
+    public Integer getHistoryAndCivics() {return historyAndCivics;}
 
-    public int getEnglishI() {return englishI;}
+    public Integer getEnglishI() {return englishI;}
 
-    public int getEnglishII() {return englishII;}
+    public Integer getEnglishII() {return englishII;}
 
     public char getDrawing() {return drawing;}
 
-    public int getGeography() {return geography;}
+    public Integer getGeography() {return geography;}
 
-    public int getGsc() {return gsc;}
+    public String getTerm() {return term;}
 
-    public int getSst() {return sst;}
+    public Integer getGsc() {return gsc;}
 
-    public MarksWrapper setMaths(int maths) {
+    public Integer getSst() {return sst;}
+
+    public MarksWrapper setMaths(Integer maths) {
         this.maths = maths;
         return this;
     }
 
-    public MarksWrapper setPhysics(int physics) {
+    public MarksWrapper setPhysics(Integer physics) {
         this.physics = physics;
         return this;
     }
 
-    public MarksWrapper setMsc(int msc) {
+    public MarksWrapper setMsc(Integer msc) {
         this.msc = msc;
         return this;
     }
 
-    public MarksWrapper setBiology(int biology) {
+    public MarksWrapper setBiology(Integer biology) {
         this.biology = biology;
         return this;
     }
 
-    public MarksWrapper setChemistry(int chemistry) {
+    public MarksWrapper setChemistry(Integer chemistry) {
         this.chemistry = chemistry;
         return this;
     }
 
-    public MarksWrapper setGk(int gk) {
+    public MarksWrapper setGk(Integer gk) {
         this.gk = gk;
         return this;
     }
 
-    public MarksWrapper setHistoryAndCivics(int historyAndCivics) {
+    public MarksWrapper setHistoryAndCivics(Integer historyAndCivics) {
         this.historyAndCivics = historyAndCivics;
         return this;
     }
 
-    public MarksWrapper setBengali(int bengali) {
+    public MarksWrapper setBengali(Integer bengali) {
         this.bengali = bengali;
         return this;
     }
 
-    public MarksWrapper setHindi(int hindi) {
+    public MarksWrapper setHindi(Integer hindi) {
         this.hindi = hindi;
         return this;
     }
 
-    public MarksWrapper setComputer(int computer) {
+    public MarksWrapper setComputer(Integer computer) {
         this.computer = computer;
         return this;
     }
 
-    public MarksWrapper setEnglishI(int englishI) {
+    public MarksWrapper setEnglishI(Integer englishI) {
         this.englishI = englishI;
         return this;
     }
 
-    public MarksWrapper setEnglishII(int englishII) {
+    public MarksWrapper setEnglishII(Integer englishII) {
         this.englishII = englishII;
         return this;
     }
@@ -115,17 +118,22 @@ public class MarksWrapper {
         return this;
     }
 
-    public MarksWrapper setGeography(int geography) {
+    public MarksWrapper setGeography(Integer geography) {
         this.geography = geography;
         return this;
     }
 
-    public MarksWrapper setGsc(int gsc) {
+    public MarksWrapper setTerm(String term) {
+        this.term = term;
+        return this;
+    }
+
+    public MarksWrapper setGsc(Integer gsc) {
         this.gsc = gsc;
         return this;
     }
 
-    public MarksWrapper setSst(int sst) {
+    public MarksWrapper setSst(Integer sst) {
         this.sst = sst;
         return this;
     }

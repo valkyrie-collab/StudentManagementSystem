@@ -5,11 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16f9186a-36c1-4b04-87ce-d4429cc6da3e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/config/TokenConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/config/TokenConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/model/MarksWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/model/MarksWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/service/MarksService.java" beforeDir="false" afterPath="$PROJECT_DIR$/marks-service/src/main/java/com/valkyrie/marks_service/service/MarksService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/controller/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/controller/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/feign/MarksFeignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/feign/MarksFeignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/feign/TeacherFeignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/feign/TeacherFeignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/MarksWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/MarksWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/controller/TeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/controller/TeacherController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/feign/StudentFeignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/feign/StudentFeignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/MarksWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/MarksWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/service/TeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/service/TeacherService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,11 +103,11 @@
       <recent name="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.valkyrie.student_service.model" />
       <recent name="com.valkyrie.teacher_service.model" />
+      <recent name="com.valkyrie.student_service.model" />
+      <recent name="com.valkyrie.teacher_service.config" />
+      <recent name="com.valkyrie.student_service.config" />
       <recent name="com.valkyrie.teacher_service.feign" />
-      <recent name="com.valkyrie.api_gateway.model" />
-      <recent name="com.valkyrie.marks_service.model" />
     </key>
   </component>
   <component name="RunDashboard">

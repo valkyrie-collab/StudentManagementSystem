@@ -105,16 +105,17 @@ public class StudentService {
     }
 
     private StudentWrapper getWrapper(Student student, boolean doFeign) {
-        ResponseEntity<List<MarksWrapper>> marks = marksFeign.findByStudentId(student.getId());
+        ResponseEntity<List<MarksWrapper>> marks = marksFeign.findByStudentId(
+                Base64.getEncoder().encodeToString(student.getId().getBytes()));
         System.out.println(student.getClassTeacherId());
         ResponseEntity<TeacherWrapper> teacher = null;
 
         if (!doFeign) {
-            teacher = teacherFeign.findTeacherById(
+            teacher = teacherFeign.findTeacherById(null,
                     Base64.getEncoder().encodeToString(student.getClassTeacherId().getBytes()), false);
             doFeign = true;
         } else {
-            teacher = teacherFeign.findTeacherById(
+            teacher = teacherFeign.findTeacherById(null,
                     Base64.getEncoder().encodeToString(student.getClassTeacherId().getBytes()), true);
         }
 
@@ -154,16 +155,15 @@ public class StudentService {
                     student.getMotherFirstName(), student.getMotherSecondName()
             );
             String classRoom = teacherFeign.findTeacherId(
-                    Base64.getEncoder().encodeToString(
-                            (student.getStander() + student.getSection()).getBytes()
-                    )).getBody();
+                    (student.getStander() + student.getSection())).getBody();
 
             if (classRoom == null || classRoom.isEmpty()) {
                 return Store.initialize(HttpStatus.BAD_REQUEST, new ArrayList<>());
             }
 
             ResponseEntity<String> teacher =
-                    teacherFeign.checkForTeacher(classRoom);
+                    teacherFeign.checkForTeacher(null,
+                            Base64.getEncoder().encodeToString(classRoom.getBytes()));
 
             if (modifiedName[0] == null ||
                     (!teacher.getStatusCode().equals(
@@ -187,7 +187,7 @@ public class StudentService {
                 repo.save(student);
                 message.add("The Student With ID = " + uuid + " has been added successfully...");
             } else if (!repo.findById(student.getId()).orElse(student).toString().equals(student.toString())) {
-                repo.save(student);
+                repo.save(student.setClassTeacherId(classRoom));
                 message.add("The Student With ID = " + student.getId() + " has been updated successfully...");
             } else {
                 message.add("The Student not updated/saved....");
@@ -229,7 +229,7 @@ public class StudentService {
         }
 
         return !studentWrappers.isEmpty()? Store.initialize(HttpStatus.OK, studentWrappers) :
-                Store.initialize(HttpStatus.BAD_REQUEST, null);
+                Store.initialize(HttpStatus.OK, null);
     }
 
     @Transactional
@@ -381,6 +381,7 @@ public class StudentService {
                     "The Student with Id = " + id + " has already been deleted....");
         }
 
+        marksFeign.removeByStudentId(List.of(Base64.getEncoder().encodeToString(id.getBytes())));
         repo.deleteById(id);
 
         return repo.findById(id).orElse(null) == null?
@@ -392,10 +393,18 @@ public class StudentService {
 
     @Transactional
     public Store<String> deleteStudentsByStanderAndSection(String stander, char section) {
+        List<String> studentIds;
 
         if (repo.findAllByStanderAndSection(stander, section).isEmpty()) {
             return Store.initialize(HttpStatus.OK,
                     String.format("No students found in Stander = %s and Section = %c", stander, section ));
+        }
+        List<Student> students = repo.findAllByStanderAndSection(stander, section);
+
+        if (!students.isEmpty()) {
+            studentIds = students.stream().map(
+                    s -> Base64.getEncoder().encodeToString(s.getId().getBytes())).toList();
+            marksFeign.removeByStudentId(studentIds);
         }
 
         repo.deleteAllByStanderAndSection(stander, section);

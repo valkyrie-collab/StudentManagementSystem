@@ -1,5 +1,6 @@
 package com.valkyrie.teacher_service.controller;
 
+import com.valkyrie.teacher_service.config.TokenConfiguration;
 import com.valkyrie.teacher_service.model.TeacherWrapper;
 import com.valkyrie.teacher_service.model.UpperCaseTask;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class TeacherController {
     @Autowired
     private void setService(TeacherService service) {this.service = service;}
 
+    private TokenConfiguration config;
+    @Autowired
+    private void setConfig(TokenConfiguration config) {this.config = config;}
+
     @PostMapping("/save-teacher")
     public ResponseEntity<String> save(@RequestBody List<Teacher> teachers) {
         System.out.println("this is working");
@@ -42,10 +47,16 @@ public class TeacherController {
     }
 
     @GetMapping("/check-for-teacher")
-    public ResponseEntity<String> checkForTeacher(@RequestParam String id) {
+    public ResponseEntity<String> checkForTeacher(@RequestParam (required = false) String token,
+                                                  @RequestParam (required = false) String id) {
 
         try{
-            id = new String(Base64.getDecoder().decode(id));
+
+            if (id == null) {
+                id = config.getUsername(token);
+            } else {
+                id = new String(Base64.getDecoder().decode(id));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -63,11 +74,17 @@ public class TeacherController {
     }
 
     @GetMapping("/find-teacher-by-id")
-    public ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam String id,
+    public ResponseEntity<TeacherWrapper> findTeacherById(@RequestParam (required = false) String token,
+                                                          @RequestParam (required = false) String id,
                                                           @RequestParam boolean doFeign) {
 
         try{
-            id = new String(Base64.getDecoder().decode(id));
+
+            if (id == null) {
+                id = config.getUsername(token);
+            } else {
+                id = new String(Base64.getDecoder().decode(id));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
