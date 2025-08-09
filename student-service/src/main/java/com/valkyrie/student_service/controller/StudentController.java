@@ -24,15 +24,23 @@ public class StudentController {
     private void setConfig(TokenConfiguration config) {this.config = config;}
 
     @PostMapping("/save-student")
-    public ResponseEntity<List<String>> save(@RequestParam String token,
-                                             @RequestBody Student student) {
-        String id = token;
-        try {
-            id = config.getUsername(id);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+    public ResponseEntity<List<String>> save(@RequestBody Student student) {
+//        String id = token;
+//        try {
+//            id = config.getUsername(id);
+//        } catch (RuntimeException e) {
+//            throw new RuntimeException(e);
+//        }
+        String email = student.getEmail();
+        StringBuilder id = new StringBuilder();
+
+        for (char character : email.toCharArray()) {
+            if (character == '@') {
+                break;
+            }
+            id.append(character);
         }
-        Store<List<String>> store = service.save(id, student);
+        Store<List<String>> store = service.save(id.toString(), student);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }

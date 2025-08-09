@@ -1,6 +1,8 @@
 package com.valkyrie.authentication_service.controller;
 
 import com.valkyrie.authentication_service.model.Store;
+import com.valkyrie.authentication_service.model.Student;
+import com.valkyrie.authentication_service.model.Teacher;
 import com.valkyrie.authentication_service.model.User;
 import com.valkyrie.authentication_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,24 @@ public class UserController {
     @GetMapping("/get-user")
     public ResponseEntity<User> getUser(@RequestParam String username) {
         Store<User> store = service.getUser(username);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
+    @PostMapping("/save-teacher")
+    public ResponseEntity<String> saveTeacher(@RequestParam String role,
+                                              @RequestParam String password,
+                                              @RequestBody Teacher teacher) {
+        Store<String> store = service.getTeacherResponse(teacher, "ROLE_" + role.toUpperCase(), password);
+
+        return ResponseEntity.status(store.getStatus()).body(store.getInstance());
+    }
+
+    @PostMapping("/save-student")
+    public ResponseEntity<String> saveStudent(@RequestParam String role,
+                                              @RequestParam String password,
+                                              @RequestBody Student student) {
+        Store<String> store = service.getStudentResponse(student, "ROLE_" + role.toUpperCase(), password);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }

@@ -126,7 +126,7 @@ public class StudentService {
                 .setFatherSecondName(student.getFatherSecondName())
                 .setMotherFirstName(student.getMotherFirstName())
                 .setMotherSecondName(student.getMotherSecondName())
-                .setFirstName(student.getFirstName())
+                .setFirstName(student.getFirstName()).setEmail(student.getEmail())
                 .setSecondName(student.getSecondName()).setImage(student.getImage())
                 .setPassOut(student.getPassOut()).setRole(student.getRole())
                 .setSection(student.getSection()).setStander(student.getStander())

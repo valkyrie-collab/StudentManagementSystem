@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 public class TeacherWrapper {
+    private String id;
+    private String email;
     private String firstName;
     private String secondName;
     private String fatherFirstName;
@@ -23,6 +25,10 @@ public class TeacherWrapper {
     private Image image;
     private int salary;
     private List<StudentWrapper> students;
+
+    public String getId() {return id;}
+
+    public String getEmail() {return email;}
 
     public String getFirstName() {return firstName;}
 
@@ -55,6 +61,16 @@ public class TeacherWrapper {
     public byte getAge() {return age;}
 
     public int getSalary() {return salary;}
+
+    public TeacherWrapper setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public TeacherWrapper setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
     public TeacherWrapper setFirstName(String firstName) {
         this.firstName = firstName;

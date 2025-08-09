@@ -1,9 +1,15 @@
-package com.valkyrie.student_service.model;
+package com.valkyrie.authentication_service.model;
 
-import java.util.List;
+//import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.util.Date;
+//import java.util.List;
 
-public class StudentWrapper {
+public class Student {
     private String id;
     private String email;
     private String firstName;
@@ -18,11 +24,12 @@ public class StudentWrapper {
     private char section;
     private byte role;
     private long contact;
-    private List<MarksWrapper> marks;
+    private String subjectId;
     private Date dob;
     private String bloodGroup;
     private Image image;
-    private TeacherWrapper teacherWrapper;
+    private String classTeacherId;
+//    private String classTeacherName;
 
     public String getId() {return id;}
 
@@ -52,7 +59,7 @@ public class StudentWrapper {
 
     public long getContact() {return contact;}
 
-    public List<MarksWrapper> getMarks() {return marks;}
+    public String getSubjectId() {return subjectId;}
 
     public Date getDob() {return dob;}
 
@@ -60,100 +67,114 @@ public class StudentWrapper {
 
     public Image getImage() {return image;}
 
-    public TeacherWrapper getClassTeacher() {return teacherWrapper;}
+    public String getClassTeacherId() {return classTeacherId;}
 
-    public StudentWrapper setId(String id) {
+//    public String getClassTeacherName() {return classTeacherName;}
+
+    public Student setId(String id) {
         this.id = id;
         return this;
     }
 
-    public StudentWrapper setEmail(String email) {
+    public Student setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public StudentWrapper setFirstName(String firstName) {
+    public Student setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public StudentWrapper setSecondName(String secondName) {
+    public Student setSecondName(String secondName) {
         this.secondName = secondName;
         return this;
     }
 
-    public StudentWrapper setFatherFirstName(String fatherFirstName) {
+    public Student setFatherFirstName(String fatherFirstName) {
         this.fatherFirstName = fatherFirstName;
         return this;
     }
 
-    public StudentWrapper setFatherSecondName(String fatherSecondName) {
+    public Student setFatherSecondName(String fatherSecondName) {
         this.fatherSecondName = fatherSecondName;
         return this;
     }
 
-    public StudentWrapper setMotherFirstName(String motherFirstName) {
+    public Student setMotherFirstName(String motherFirstName) {
         this.motherFirstName = motherFirstName;
         return this;
     }
 
-    public StudentWrapper setEnrolment(Date enrolment) {
+    public Student setEnrolment(Date enrolment) {
         this.enrolment = enrolment;
         return this;
     }
 
-    public StudentWrapper setPassOut(Date passOut) {
+    public Student setPassOut(Date passOut) {
         this.passOut = passOut;
         return this;
     }
 
-    public StudentWrapper setStander(String stander) {
+    public Student setStander(String stander) {
         this.stander = stander;
         return this;
     }
 
-    public StudentWrapper setMotherSecondName(String motherSecondName) {
+    public Student setMotherSecondName(String motherSecondName) {
         this.motherSecondName = motherSecondName;
         return this;
     }
 
-    public StudentWrapper setSection(char section) {
+    public Student setSection(char section) {
         this.section = section;
         return this;
     }
 
-    public StudentWrapper setRole(byte role) {
+    public Student setRole(byte role) {
         this.role = role;
         return this;
     }
 
-    public StudentWrapper setContact(long contact) {
+    public Student setContact(long contact) {
         this.contact = contact;
         return this;
     }
 
-    public StudentWrapper setDob(Date dob) {
+    public Student setDob(Date dob) {
         this.dob = dob;
         return this;
     }
 
-    public StudentWrapper setMarks(List<MarksWrapper> marks) {
-        this.marks = marks;
+    public Student setSubjectId(String subjectId) {
+        this.subjectId = subjectId;
         return this;
     }
 
-    public StudentWrapper setBloodGroup(String bloodGroup) {
+    public Student setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
         return this;
     }
 
-    public StudentWrapper setImage(Image image) {
+    public Student setImage(Image image) {
         this.image = image;
         return this;
     }
 
-    public StudentWrapper setClassTeacher(TeacherWrapper teacherWrapper) {
-        this.teacherWrapper = teacherWrapper;
+    public Student setClassTeacherId(String classTeacherId) {
+        this.classTeacherId = classTeacherId;
         return this;
+    }
+
+//    public Student setClassTeacherName(String classTeacherName) {
+//        this.classTeacherName = classTeacherName;
+//        return this;
+//    }
+
+    @Override
+    public String toString() {
+        return id + firstName + secondName + fatherFirstName + fatherSecondName +
+                motherFirstName + motherSecondName + enrolment + passOut +
+                stander + section + role + contact + subjectId + dob + bloodGroup ;
     }
 }

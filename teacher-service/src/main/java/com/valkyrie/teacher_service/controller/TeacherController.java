@@ -34,16 +34,24 @@ public class TeacherController {
     private void setConfig(TokenConfiguration config) {this.config = config;}
 
     @PostMapping("/save-teacher")
-    public ResponseEntity<String> save(@RequestParam String token,
-                                       @RequestBody Teacher teacher) {
+    public ResponseEntity<String> save(@RequestBody Teacher teacher) {
 //        System.out.println("this is working");
-        String id = token;
-        try {
-            id = config.getUsername(id);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+//        String id = token;
+//        try {
+//            id = config.getUsername(id);
+//        } catch (RuntimeException e) {
+//            throw new RuntimeException(e);
+//        }
+        String email = teacher.getEmail();
+        StringBuilder id = new StringBuilder();
+
+        for (char character : email.toCharArray()) {
+            if (character == '@') {
+                break;
+            }
+            id.append(character);
         }
-        Store<String> store = service.save(id, teacher);
+        Store<String> store = service.save(id.toString(), teacher);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class StudentWrapper {
     private String id;
+    private String email;
     private String firstName;
     private String secondName;
     private String fatherFirstName;
@@ -24,6 +25,8 @@ public class StudentWrapper {
     private TeacherWrapper teacherWrapper;
 
     public String getId() {return id;}
+
+    public String getEmail() {return email;}
 
     public String getFirstName() {return firstName;}
 
@@ -61,6 +64,11 @@ public class StudentWrapper {
 
     public StudentWrapper setId(String id) {
         this.id = id;
+        return this;
+    }
+
+    public StudentWrapper setEmail(String email) {
+        this.email = email;
         return this;
     }
 

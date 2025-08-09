@@ -38,14 +38,14 @@ public class TeacherService {
         return new TeacherWrapper().setClassTeacher(teacher.getClassTeacher())
                 .setAge(teacher.getAge()).setDateOfJoin(teacher.getDateOfJoin())
                 .setDob(teacher.getDate()).setImage(teacher.getImage())
-                .setFatherFirstName(teacher.getFatherFirstName())
+                .setFatherFirstName(teacher.getFatherFirstName()).setId(teacher.getId())
                 .setFatherSecondName(teacher.getFatherSecondName())
                 .setMotherFirstName(teacher.getMotherFirstName())
                 .setMotherSecondName(teacher.getMotherSecondName())
                 .setFirstName(teacher.getFirstName()).setSecondName(teacher.getSecondName())
                 .setPassOutUniversity(teacher.getPassOutUniversity())
                 .setSalary(teacher.getSalary()).setSubjects(teacher.getSubjects())
-                .setQualification(teacher.getQualification())
+                .setQualification(teacher.getQualification()).setEmail(teacher.getEmail())
                 .setStudent(doFeign? (students.getStatusCode().equals(HttpStatusCode.valueOf(200))?
                                 students.getBody() : null) : null
                 );

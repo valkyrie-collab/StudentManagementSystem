@@ -1,14 +1,11 @@
-package com.valkyrie.teacher_service.model;
+package com.valkyrie.authentication_service.model;
 
 import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "teacher")
 public class Teacher {
-    @Id
     private String id;
     private String email;
     private String firstName;
@@ -19,13 +16,11 @@ public class Teacher {
     private String motherSecondName;
     private String classTeacher;
     private String qualification;
-    @ElementCollection
     private List<String> subjects;
     private Date dateOfJoin;
     private String passOutUniversity;
     private Date dob;
     private byte age;
-    @Embedded
     private Image image;
     private int salary;
 

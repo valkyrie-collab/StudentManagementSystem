@@ -14,6 +14,7 @@ import java.util.Date;
 public class Student {
     @Id
     private String id;
+    private String email;
     private String firstName;
     private String secondName;
     private String fatherFirstName;
@@ -35,6 +36,8 @@ public class Student {
 //    private String classTeacherName;
 
     public String getId() {return id;}
+
+    public String getEmail() {return email;}
 
     public String getFirstName() {return firstName;}
 
@@ -74,6 +77,11 @@ public class Student {
 
     public Student setId(String id) {
         this.id = id;
+        return this;
+    }
+
+    public Student setEmail(String email) {
+        this.email = email;
         return this;
     }
 
