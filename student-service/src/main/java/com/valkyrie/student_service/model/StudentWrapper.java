@@ -1,5 +1,6 @@
 package com.valkyrie.student_service.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Date;
 
@@ -12,14 +13,14 @@ public class StudentWrapper {
     private String fatherSecondName;
     private String motherFirstName;
     private String motherSecondName;
-    private Date enrolment;
-    private Date passOut;
+    private LocalDate enrolment;
+    private LocalDate passOut;
     private String stander;
     private char section;
     private byte role;
     private long contact;
     private List<MarksWrapper> marks;
-    private Date dob;
+    private LocalDate dob;
     private String bloodGroup;
     private Image image;
     private TeacherWrapper teacherWrapper;
@@ -40,9 +41,9 @@ public class StudentWrapper {
 
     public String getMotherSecondName() {return motherSecondName;}
 
-    public Date getEnrolment() {return enrolment;}
+    public LocalDate getEnrolment() {return enrolment;}
 
-    public Date getPassOut() {return passOut;}
+    public LocalDate getPassOut() {return passOut;}
 
     public String getStander() {return stander;}
 
@@ -54,7 +55,7 @@ public class StudentWrapper {
 
     public List<MarksWrapper> getMarks() {return marks;}
 
-    public Date getDob() {return dob;}
+    public LocalDate getDob() {return dob;}
 
     public String getBloodGroup() {return bloodGroup;}
 
@@ -97,12 +98,12 @@ public class StudentWrapper {
         return this;
     }
 
-    public StudentWrapper setEnrolment(Date enrolment) {
+    public StudentWrapper setEnrolment(LocalDate enrolment) {
         this.enrolment = enrolment;
         return this;
     }
 
-    public StudentWrapper setPassOut(Date passOut) {
+    public StudentWrapper setPassOut(LocalDate passOut) {
         this.passOut = passOut;
         return this;
     }
@@ -132,7 +133,7 @@ public class StudentWrapper {
         return this;
     }
 
-    public StudentWrapper setDob(Date dob) {
+    public StudentWrapper setDob(LocalDate dob) {
         this.dob = dob;
         return this;
     }

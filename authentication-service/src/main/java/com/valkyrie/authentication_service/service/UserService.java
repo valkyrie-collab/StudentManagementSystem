@@ -86,6 +86,7 @@ public class UserService {
 
     public Store<String> getTeacherResponse(Teacher teacher, String role, String password) {
         ResponseEntity<String> response = teacherFeign.save(teacher);
+//        System.out.println(teacher.getDat);
 
         String email = teacher.getEmail();
         StringBuilder id = new StringBuilder();
@@ -105,7 +106,7 @@ public class UserService {
 
         repo.save(user.setPassword(ENCODER.encode(user.getPassword())));
         return repo.findById(user.getUsername()).orElse(null) != null &&
-                response.getStatusCode().equals(HttpStatusCode.valueOf(200))?
+                response.getStatusCode().equals(HttpStatusCode.valueOf(202))?
                 Store.initialize(HttpStatus.ACCEPTED, "The User saved Successfully......") :
                 Store.initialize(HttpStatus.BAD_REQUEST, "The User not saved......");
     }
@@ -131,7 +132,7 @@ public class UserService {
 
         repo.save(user.setPassword(ENCODER.encode(user.getPassword())));
         return repo.findById(user.getUsername()).orElse(null) != null &&
-                response.getStatusCode().equals(HttpStatusCode.valueOf(200))?
+                response.getStatusCode().equals(HttpStatusCode.valueOf(202))?
                 Store.initialize(HttpStatus.ACCEPTED, "The User saved Successfully......") :
                 Store.initialize(HttpStatus.BAD_REQUEST, "The User not saved......");
     }

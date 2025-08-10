@@ -1,9 +1,11 @@
 package com.valkyrie.student_service.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TeacherWrapper {
+    private String id;
+    private String email;
     private String firstName;
     private String secondName;
     private String fatherFirstName;
@@ -13,13 +15,17 @@ public class TeacherWrapper {
     private String classTeacher;
     private String qualification;
     private List<String> subjects;
-    private Date dateOfJoin;
+    private LocalDate dateOfJoin;
     private String passOutUniversity;
-    private Date dob;
+    private LocalDate dob;
     private byte age;
     private Image image;
     private int salary;
     private List<StudentWrapper> students;
+
+    public String getId() {return id;}
+
+    public String getEmail() {return email;}
 
     public String getFirstName() {return firstName;}
 
@@ -41,17 +47,27 @@ public class TeacherWrapper {
 
     public List<String> getSubjects() {return subjects;}
 
-    public Date getDateOfJoin() {return dateOfJoin;}
+    public LocalDate getDateOfJoin() {return dateOfJoin;}
 
     public List<StudentWrapper> getStudent() {return students;}
 
     public Image getImage() {return image;}
 
-    public Date getDob() {return dob;}
+    public LocalDate getDob() {return dob;}
 
     public byte getAge() {return age;}
 
     public int getSalary() {return salary;}
+
+    public TeacherWrapper setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public TeacherWrapper setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
     public TeacherWrapper setFirstName(String firstName) {
         this.firstName = firstName;
@@ -98,7 +114,7 @@ public class TeacherWrapper {
         return this;
     }
 
-    public TeacherWrapper setDateOfJoin(Date dateOfJoin) {
+    public TeacherWrapper setDateOfJoin(LocalDate dateOfJoin) {
         this.dateOfJoin = dateOfJoin;
         return this;
     }
@@ -113,7 +129,7 @@ public class TeacherWrapper {
         return this;
     }
 
-    public TeacherWrapper setDob(Date dob) {
+    public TeacherWrapper setDob(LocalDate dob) {
         this.dob = dob;
         return this;
     }

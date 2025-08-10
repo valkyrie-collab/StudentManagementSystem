@@ -2,6 +2,7 @@ package com.valkyrie.teacher_service.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +22,9 @@ public class Teacher {
     private String qualification;
     @ElementCollection
     private List<String> subjects;
-    private Date dateOfJoin;
+    private LocalDate dateOfJoin;
     private String passOutUniversity;
-    private Date dob;
+    private LocalDate dob;
     private byte age;
     @Embedded
     private Image image;
@@ -51,13 +52,13 @@ public class Teacher {
     
     public List<String> getSubjects() {return subjects;}
     
-    public Date getDateOfJoin() {return dateOfJoin;}
+    public LocalDate getDateOfJoin() {return dateOfJoin;}
 
     public String getPassOutUniversity() {return passOutUniversity;}
 
     public Image getImage() {return image;}
 
-    public Date getDate() {return dob;}
+    public LocalDate getDob() {return dob;}
 
     public byte getAge() {return age;}
 
@@ -118,7 +119,7 @@ public class Teacher {
         return this;
     }
 
-    public Teacher setDateOfJoin(Date dateOfJoin) {
+    public Teacher setDateOfJoin(LocalDate dateOfJoin) {
         this.dateOfJoin = dateOfJoin;
         return this;
     }
@@ -133,7 +134,7 @@ public class Teacher {
         return this;
     }
 
-    public Teacher setDob(Date dob) {
+    public Teacher setDob(LocalDate dob) {
         this.dob = dob;
         return this;
     }

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.time.LocalDate;
 import java.util.Date;
 //import java.util.List;
 
@@ -21,14 +22,14 @@ public class Student {
     private String fatherSecondName;
     private String motherFirstName;
     private String motherSecondName;
-    private Date enrolment;
-    private Date passOut;
+    private LocalDate enrolment;
+    private LocalDate passOut;
     private String stander;
     private char section;
     private byte role;
     private long contact;
     private String subjectId;
-    private Date dob;
+    private LocalDate dob;
     private String bloodGroup;
     @Embedded //will become column in the same table
     private Image image;
@@ -51,9 +52,9 @@ public class Student {
 
     public String getMotherSecondName() {return motherSecondName;}
 
-    public Date getEnrolment() {return enrolment;}
+    public LocalDate getEnrolment() {return enrolment;}
 
-    public Date getPassOut() {return passOut;}
+    public LocalDate getPassOut() {return passOut;}
 
     public String getStander() {return stander;}
 
@@ -65,7 +66,7 @@ public class Student {
 
     public String getSubjectId() {return subjectId;}
 
-    public Date getDob() {return dob;}
+    public LocalDate getDob() {return dob;}
 
     public String getBloodGroup() {return bloodGroup;}
 
@@ -110,12 +111,12 @@ public class Student {
         return this;
     }
 
-    public Student setEnrolment(Date enrolment) {
+    public Student setEnrolment(LocalDate enrolment) {
         this.enrolment = enrolment;
         return this;
     }
 
-    public Student setPassOut(Date passOut) {
+    public Student setPassOut(LocalDate passOut) {
         this.passOut = passOut;
         return this;
     }
@@ -145,7 +146,7 @@ public class Student {
         return this;
     }
 
-    public Student setDob(Date dob) {
+    public Student setDob(LocalDate dob) {
         this.dob = dob;
         return this;
     }

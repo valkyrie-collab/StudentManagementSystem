@@ -37,7 +37,7 @@ public class TeacherService {
 
         return new TeacherWrapper().setClassTeacher(teacher.getClassTeacher())
                 .setAge(teacher.getAge()).setDateOfJoin(teacher.getDateOfJoin())
-                .setDob(teacher.getDate()).setImage(teacher.getImage())
+                .setDob(teacher.getDob()).setImage(teacher.getImage())
                 .setFatherFirstName(teacher.getFatherFirstName()).setId(teacher.getId())
                 .setFatherSecondName(teacher.getFatherSecondName())
                 .setMotherFirstName(teacher.getMotherFirstName())

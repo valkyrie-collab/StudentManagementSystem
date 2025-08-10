@@ -3,6 +3,7 @@ package com.valkyrie.teacher_service.model;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +19,9 @@ public class TeacherWrapper {
     private String classTeacher;
     private String qualification;
     private List<String> subjects;
-    private Date dateOfJoin;
+    private LocalDate dateOfJoin;
     private String passOutUniversity;
-    private Date dob;
+    private LocalDate dob;
     private byte age;
     private Image image;
     private int salary;
@@ -50,13 +51,13 @@ public class TeacherWrapper {
 
     public List<String> getSubjects() {return subjects;}
 
-    public Date getDateOfJoin() {return dateOfJoin;}
+    public LocalDate getDateOfJoin() {return dateOfJoin;}
 
     public List<StudentWrapper> getStudent() {return students;}
 
     public Image getImage() {return image;}
 
-    public Date getDob() {return dob;}
+    public LocalDate getDob() {return dob;}
 
     public byte getAge() {return age;}
 
@@ -117,7 +118,7 @@ public class TeacherWrapper {
         return this;
     }
 
-    public TeacherWrapper setDateOfJoin(Date dateOfJoin) {
+    public TeacherWrapper setDateOfJoin(LocalDate dateOfJoin) {
         this.dateOfJoin = dateOfJoin;
         return this;
     }
@@ -132,7 +133,7 @@ public class TeacherWrapper {
         return this;
     }
 
-    public TeacherWrapper setDob(Date dob) {
+    public TeacherWrapper setDob(LocalDate dob) {
         this.dob = dob;
         return this;
     }
