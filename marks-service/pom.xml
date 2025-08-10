@@ -72,6 +72,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>marks-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

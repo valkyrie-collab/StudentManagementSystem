@@ -1,0 +1,4 @@
+CREATE DATABASE authentication;
+CREATE DATABASE marks;
+CREATE DATABASE student;
+CREATE DATABASE teacher;

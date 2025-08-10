@@ -5,17 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16f9186a-36c1-4b04-87ce-d4429cc6da3e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DBMS/DBMS.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication-service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marks-service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service-registry/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student-service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher-service/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/StudentWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/StudentWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/TeacherWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/java/com/valkyrie/student_service/model/TeacherWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/StudentWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/StudentWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/TeacherWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/model/TeacherWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/service/TeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/java/com/valkyrie/teacher_service/service/TeacherService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-registry/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service-registry/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,14 +76,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.ApiGatewayApplication.executor": "Run",
     "Spring Boot.AuthenticationServiceApplication.executor": "Run",
     "Spring Boot.MarksServiceApplication.executor": "Run",
     "Spring Boot.ServiceRegistryApplication.executor": "Run",
     "Spring Boot.StudentServiceApplication.executor": "Run",
     "Spring Boot.TeacherServiceApplication.executor": "Run",
-    "git-widget-placeholder": "ApplicationWithTokentwo",
-    "last_opened_file_path": "/home/valkyrie/Documents/Programming/Spring_Programming/StudentManagementMicroservice/authentication-service/src/main/java/com/valkyrie/authentication_service/model",
+    "git-widget-placeholder": "DockerBranchTwo",
+    "last_opened_file_path": "/home/valkyrie/Documents/Programming/Spring_Programming/StudentManagementMicroservice/api-gateway",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,8 +97,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model" />
-      <recent name="$PROJECT_DIR$/api-gateway/src/main/java/com/valkyrie/api_gateway/config" />
+      <recent name="$PROJECT_DIR$/api-gateway" />
+      <recent name="$PROJECT_DIR$/authentication-service" />
+      <recent name="$PROJECT_DIR$/marks-service" />
+      <recent name="$PROJECT_DIR$/service-registry" />
+      <recent name="$PROJECT_DIR$/student-service" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/teacher-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.valkyrie.teacher_service.model" />

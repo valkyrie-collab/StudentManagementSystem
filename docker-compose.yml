@@ -1,0 +1,108 @@
+version: "3.8"
+
+networks:
+  myNetwork:
+    driver: bridge
+
+volumes:
+  postgres-storage-data:
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: valkyrie
+      POSTGRES_PASSWORD: valkyrie3008
+      POSTGRES_DB: valkyrieDB
+    networks:
+      - myNetwork
+    volumes:
+      - postgres-storage-data:/var/lib/postgresql/data
+      - ./DBMS/DBMS.sql:/docker-entrypoint-initdb.d/DBMS.sql
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - authentication-service
+      - marks-service
+      - student-service
+      - teacher-service
+    environment:
+      JWTS_SECURITY: LE6KbvT8sWgliqAJqrnT9d43V/KhHkJKLjAq3edWCak=
+      SERVER_PORT: 8080
+    networks:
+      - myNetwork
+
+  authentication-service:
+    build: ./authentication-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - postgres
+    environment:
+      URL: jdbc:postgresql://postgres:5432/authentication
+      USERNAME: valkyrie
+      PASSWORD: valkyrie3008
+      JWTS_SECURITY: LE6KbvT8sWgliqAJqrnT9d43V/KhHkJKLjAq3edWCak=
+      SERVER_PORT: 8084
+    networks:
+      - myNetwork
+
+  marks-service:
+    build: ./marks-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - postgres
+    environment:
+      URL: jdbc:postgresql://postgres:5432/marks
+      USERNAME: valkyrie
+      PASSWORD: valkyrie3008
+      JWTS_SECURITY: LE6KbvT8sWgliqAJqrnT9d43V/KhHkJKLjAq3edWCak=
+      SERVER_PORT: 8083
+    networks:
+      - myNetwork
+
+  student-service:
+    build: ./student-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
+    environment:
+      URL: jdbc:postgresql://postgres:5432/student
+      USERNAME: valkyrie
+      PASSWORD: valkyrie3008
+      JWTS_SECURITY: LE6KbvT8sWgliqAJqrnT9d43V/KhHkJKLjAq3edWCak=
+      SERVER_PORT: 8082
+    networks:
+      - myNetwork
+
+  teacher-service:
+    build: ./teacher-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    environment:
+      URL: jdbc:postgresql://postgres:5432/teacher
+      USERNAME: valkyrie
+      PASSWORD: valkyrie3008
+      JWTS_SECURITY: LE6KbvT8sWgliqAJqrnT9d43V/KhHkJKLjAq3edWCak=
+      SERVER_PORT: 8081
+    networks:
+      - myNetwork
+
+  service-registry:
+    build: ./service-registry
+    ports:
+      - "8761:8761"
+    environment:
+      HOSTNAME: service-registry
+      SERVER_PORT: 8761
+    networks:
+      - myNetwork
