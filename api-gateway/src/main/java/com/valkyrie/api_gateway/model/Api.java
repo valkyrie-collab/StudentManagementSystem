@@ -25,25 +25,25 @@ public class Api {
 
     @Bean
     public RouterFunction<ServerResponse> routerFunction() {
-        return get("get-teacher", "/teacher/**", "http://localhost:8081/")
+        return get("get-teacher", "/teacher/**", "http://teacher-service:8081/")
                 .and(
-                        post("post-teacher", "/teacher/**", "http://localhost:8081/")
+                        post("post-teacher", "/teacher/**", "http://teacher-service:8081/")
                 ).and(
-                        delete("delete-teacher", "/teacher/**", "http://localhost:8081")
+                        delete("delete-teacher", "/teacher/**", "http://teacher-service:8081")
                 ).and(
-                        get("get-student", "/student/**", "http://localhost:8082/")
+                        get("get-student", "/student/**", "http://student-service:8082/")
                 ).and(
-                        post("post-student", "/student/**", "http://localhost:8082/")
+                        post("post-student", "/student/**", "http://student-service:8082/")
                 ).and(
-                        delete("delete-student", "/student/**", "http://localhost:8082/")
+                        delete("delete-student", "/student/**", "http://student-service:8082/")
                 ).and(
-                        get("get-marks", "/marks/**", "http://localhost:8083/")
+                        get("get-marks", "/marks/**", "http://marks-service:8083/")
                 ).and(
-                        post("post-marks", "/marks/**", "http://localhost:8083/")
+                        post("post-marks", "/marks/**", "http://marks-service:8083/")
                 ).and(
-                        delete("delete-marks", "/marks/**", "http://localhost:8083/")
+                        delete("delete-marks", "/marks/**", "http://marks-service:8083/")
                 ).and(
-                        post("user", "/user/**", "http://localhost:8084/")
+                        post("user", "/user/**", "http://authentication-service:8084/")
                 );
     }
 }
