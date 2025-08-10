@@ -1,9 +1,6 @@
 package com.valkyrie.authentication_service.controller;
 
-import com.valkyrie.authentication_service.model.Store;
-import com.valkyrie.authentication_service.model.Student;
-import com.valkyrie.authentication_service.model.Teacher;
-import com.valkyrie.authentication_service.model.User;
+import com.valkyrie.authentication_service.model.*;
 import com.valkyrie.authentication_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,19 +35,21 @@ public class UserController {
     }
 
     @PostMapping("/save-teacher")
-    public ResponseEntity<String> saveTeacher(@RequestParam String role,
-                                              @RequestParam String password,
-                                              @RequestBody Teacher teacher) {
-        Store<String> store = service.getTeacherResponse(teacher, "ROLE_" + role.toUpperCase(), password);
+    public ResponseEntity<String> saveTeacher(@RequestBody TeacherDTO teacher) {
+        String role = teacher.getRole();
+        String password = teacher.getPassword();
+        Store<String> store = service.getTeacherResponse(teacher.getTeacher(),
+                "ROLE_" + role.toUpperCase(), password);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
 
     @PostMapping("/save-student")
-    public ResponseEntity<String> saveStudent(@RequestParam String role,
-                                              @RequestParam String password,
-                                              @RequestBody Student student) {
-        Store<String> store = service.getStudentResponse(student, "ROLE_" + role.toUpperCase(), password);
+    public ResponseEntity<String> saveStudent(@RequestBody StudentDTO student) {
+        String role = student.getRole();
+        String password = student.getPassword();
+        Store<String> store = service.getStudentResponse(student.getStudent(),
+                "ROLE_" + role.toUpperCase(), password);
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }

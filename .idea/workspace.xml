@@ -5,22 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16f9186a-36c1-4b04-87ce-d4429cc6da3e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DBMS/DBMS.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-gateway/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication-service/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marks-service/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-registry/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/student-service/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher-service/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/StudentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/model/TeacherDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/marks-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-registry/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service-registry/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/student-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/teacher-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/valkyrie/authentication_service/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -61,40 +49,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ApiGatewayApplication.executor": "Run",
-    "Application.AuthenticationServiceApplication.executor": "Run",
-    "Application.MarksServiceApplication.executor": "Run",
-    "Application.ServiceRegistryApplication.executor": "Run",
-    "Application.StudentServiceApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ApiGatewayApplication.executor": "Run",
-    "Spring Boot.AuthenticationServiceApplication.executor": "Run",
-    "Spring Boot.MarksServiceApplication.executor": "Run",
-    "Spring Boot.ServiceRegistryApplication.executor": "Run",
-    "Spring Boot.StudentServiceApplication.executor": "Run",
-    "Spring Boot.TeacherServiceApplication.executor": "Run",
-    "git-widget-placeholder": "DockerBranchTwo",
-    "last_opened_file_path": "/home/valkyrie/Documents/Programming/Spring_Programming/StudentManagementMicroservice/api-gateway",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AuthenticationServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MarksServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServiceRegistryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StudentServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.AuthenticationServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.MarksServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ServiceRegistryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.StudentServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.TeacherServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DockerBranchTwo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/valkyrie/Documents/Programming/Spring_Programming/StudentManagementMicroservice/api-gateway&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/api-gateway" />
