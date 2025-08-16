@@ -1,6 +1,7 @@
 package com.valkyrie.student_service.controller;
 
 import com.valkyrie.student_service.config.TokenConfiguration;
+import com.valkyrie.student_service.model.Image;
 import com.valkyrie.student_service.model.Student;
 import com.valkyrie.student_service.model.Store;
 import com.valkyrie.student_service.model.StudentWrapper;
@@ -8,7 +9,9 @@ import com.valkyrie.student_service.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
@@ -24,7 +27,8 @@ public class StudentController {
     private void setConfig(TokenConfiguration config) {this.config = config;}
 
     @PostMapping("/save-student")
-    public ResponseEntity<List<String>> save(@RequestBody Student student) {
+    public ResponseEntity<List<String>> save(@RequestParam("image") MultipartFile file,
+                                             @RequestBody Student student) throws IOException {
 //        String id = token;
 //        try {
 //            id = config.getUsername(id);
@@ -40,7 +44,9 @@ public class StudentController {
             }
             id.append(character);
         }
-        Store<List<String>> store = service.save(id.toString(), student);
+        Image image = new Image().setName(file.getOriginalFilename())
+                .setType(file.getContentType()).setData(file.getBytes());
+        Store<List<String>> store = service.save(id.toString(), student.setImage(image));
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }

@@ -1,8 +1,7 @@
 package com.valkyrie.teacher_service.controller;
 
 import com.valkyrie.teacher_service.config.TokenConfiguration;
-import com.valkyrie.teacher_service.model.TeacherWrapper;
-import com.valkyrie.teacher_service.model.UpperCaseTask;
+import com.valkyrie.teacher_service.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.valkyrie.teacher_service.model.Teacher;
-import com.valkyrie.teacher_service.model.Store;
 import com.valkyrie.teacher_service.service.TeacherService;
+import org.springframework.web.multipart.MultipartFile;
 //import com.valkyrie.teacher_service.model.TeacherUpdater;
 
 //import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
@@ -34,7 +33,8 @@ public class TeacherController {
     private void setConfig(TokenConfiguration config) {this.config = config;}
 
     @PostMapping("/save-teacher")
-    public ResponseEntity<String> save(@RequestBody Teacher teacher) {
+    public ResponseEntity<String> save(@RequestParam("image") MultipartFile file,
+                                       @RequestBody Teacher teacher) throws IOException {
 //        System.out.println("this is working");
 //        String id = token;
 //        try {
@@ -51,7 +51,9 @@ public class TeacherController {
             }
             id.append(character);
         }
-        Store<String> store = service.save(id.toString(), teacher);
+        Image image = new Image().setName(file.getOriginalFilename())
+                .setType(file.getContentType()).setData(file.getBytes());
+        Store<String> store = service.save(id.toString(), teacher.setImage(image));
 
         return ResponseEntity.status(store.getStatus()).body(store.getInstance());
     }
